@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.covid19project">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,6 +19,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".EPassActivity"/>
+        <activity android:name=".HomeTreamentActivity"/>
+        <activity android:name=".HospitalAdmissionsActivity"/>
+        <activity android:name=".MyHealthStatusActivity"/>
+        <activity android:name=".VocationalTrainingCoursesActivity"/>
+        <activity android:name=".VolunteersRegistrationActivity"/>
+        <activity android:name=".TestLabsActivity"/>
+        <activity android:name=".DonateFundsActivity"/>
+        <activity android:name=".CounsellingActivity"/>
+        <activity android:name=".MedicalStoresActivity"/>
     </application>
 
 </manifest>
