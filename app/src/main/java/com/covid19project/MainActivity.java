@@ -92,9 +92,12 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent6);
                         break;
                     case 7:
-                        Intent intent7 = new Intent(MainActivity.this, CounsellingActivity.class);
+//                        Intent intent7 = new Intent(MainActivity.this, CounsellingActivity.class);
+//                        startActivity(intent7);
+//                        break;
+                        String url = "http://maps.google.co.uk/maps?q=Pharmacy&hl=en"
+                        Intent intent7 = new Intent(Intent.ACTION_VIEW,Uri.parse(url));      intent.setClassName("com.google.android.apps.maps","com.google.android.maps.MapsActivity");
                         startActivity(intent7);
-                        break;
                     case 8:
                         Intent intent8 = new Intent(MainActivity.this, EPassActivity.class);
                         startActivity(intent8);
