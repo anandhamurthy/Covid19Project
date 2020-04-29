@@ -3,6 +3,7 @@ package com.covid19project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
@@ -10,7 +11,7 @@ import android.widget.ProgressBar;
 
 public class DonateFundsActivity extends AppCompatActivity {
 
-    private String postUrl = "https://www.google.com";
+    private String postUrl = "https://ereceipt.tn.gov.in";
     private WebView webView;
 
     @Override
@@ -19,24 +20,22 @@ public class DonateFundsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_donate_funds);
 
         webView = findViewById(R.id.webView);
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
 
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setLoadWithOverviewMode(true);
-        webView.getSettings().setUseWideViewPort(true);
-        webView.setWebViewClient(new WebViewClient(){
-
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-
-                return true;
-            }
-            @Override
-            public void onPageFinished(WebView view, final String url) {
-            }
-        });
+        WebViewClientService webViewClient = new WebViewClientService(DonateFundsActivity.this);
+        webView.setWebViewClient(webViewClient);
 
         webView.loadUrl(postUrl);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack();
+        } else {
+            super.onBackPressed();
+        }
     }
 }
