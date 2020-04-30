@@ -83,9 +83,6 @@ public class MainActivity extends AppCompatActivity {
         Grid_View=findViewById(R.id.grid_view);
         Call=findViewById(R.id.call);
         sliderView = findViewById(R.id.image_slider);
-        mRequestQueue = Volley.newRequestQueue(this);
-
-        parseJSON();
 
         sliderView.setIndicatorAnimation(IndicatorAnimations.WORM);
         sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
@@ -94,6 +91,11 @@ public class MainActivity extends AppCompatActivity {
         sliderView.setIndicatorUnselectedColor(Color.GRAY);
         sliderView.setScrollTimeInSec(4);
         sliderView.startAutoCycle();
+        mRequestQueue = Volley.newRequestQueue(this);
+
+        parseJSON();
+
+
 
         Grid_View.setAdapter(adapter);
         Grid_View.setOnItemClickListener(new AdapterView.OnItemClickListener() {

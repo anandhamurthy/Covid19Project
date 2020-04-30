@@ -41,7 +41,6 @@
                 android:layout_below="@+id/home"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
                 android:layout_marginRight="25dp"
                 android:layout_marginStart="25dp"
                 android:layout_marginLeft="25dp"
