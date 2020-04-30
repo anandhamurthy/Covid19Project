@@ -8,7 +8,7 @@ import android.webkit.WebView;
 
 public class EPassActivity extends AppCompatActivity {
 
-    private String postUrl = "https://www.covid19india.org/state/TN";
+    private String postUrl = "https://stopcorona.xenovex.com/login";
     private WebView webView;
 
     @Override
@@ -16,7 +16,7 @@ public class EPassActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_e_pass);
 
-        webView = findViewById(R.id.webView);
+        webView = findViewById(R.id.web_view);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
@@ -24,6 +24,7 @@ public class EPassActivity extends AppCompatActivity {
         webView.setWebViewClient(webViewClient);
 
         webView.loadUrl(postUrl);
+
 
     }
 

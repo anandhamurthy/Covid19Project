@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private RequestQueue mRequestQueue;
     String[] web = {
             "Home Treatment",
+            "Toll Free Numbers",
             "My Health Status",
             "Medical stores",
             "Volunteers Registration",
@@ -48,12 +49,15 @@ public class MainActivity extends AppCompatActivity {
             "Counselling",
             "E-Pass",
             "Donate Funds",
+            "Donate Relief Material",
             "Support",
-            "Doctor’s Appointment"
+            "Doctor’s Appointment",
+            "FAQ"
 
     } ;
     int[] imageId = {
             R.drawable.home,
+            R.drawable.toll_numbers,
             R.drawable.health,
             R.drawable.medical_store,
             R.drawable.volunteer,
@@ -63,8 +67,10 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.counselling,
             R.drawable.pass,
             R.drawable.donate,
+            R.drawable.donate_relief,
             R.drawable.support,
-            R.drawable.doctor
+            R.drawable.doctor,
+            R.drawable.faq
 
     };
 
@@ -101,48 +107,60 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case 1:
-                        Intent intent1 = new Intent(MainActivity.this, MyHealthStatusActivity.class);
+                        Intent intent1 = new Intent(MainActivity.this, TollNumbersActivity.class);
                         startActivity(intent1);
                         break;
                     case 2:
-                        Intent intent2 = new Intent(MainActivity.this, MedicalStoresActivity.class);
+                        Intent intent2 = new Intent(MainActivity.this, MyHealthStatusActivity.class);
                         startActivity(intent2);
                         break;
                     case 3:
-                        Intent intent3 = new Intent(MainActivity.this, VolunteersRegistrationActivity.class);
+                        Intent intent3 = new Intent(MainActivity.this, MedicalStoresActivity.class);
                         startActivity(intent3);
                         break;
                     case 4:
-                        Intent intent4 = new Intent(MainActivity.this, HospitalAdmissionsActivity.class);
+                        Intent intent4 = new Intent(MainActivity.this, VolunteersRegistrationActivity.class);
                         startActivity(intent4);
                         break;
                     case 5:
-                        Intent intent5 = new Intent(MainActivity.this, TestLabsActivity.class);
+                        Intent intent5 = new Intent(MainActivity.this, HospitalAdmissionsActivity.class);
                         startActivity(intent5);
                         break;
                     case 6:
-                        Intent intent6 = new Intent(MainActivity.this, VocationalTrainingCoursesActivity.class);
+                        Intent intent6 = new Intent(MainActivity.this, TestLabsActivity.class);
                         startActivity(intent6);
                         break;
                     case 7:
-//                        Intent intent7 = new Intent(MainActivity.this, CounsellingActivity.class);
-//                        startActivity(intent7);
-//                        break;
-                        String url = "http://maps.google.co.uk/maps?q=Pharmacy&hl=en";
-                        Intent intent7 = new Intent(Intent.ACTION_VIEW,Uri.parse(url));
-                        intent7.setClassName("com.google.android.apps.maps","com.google.android.maps.MapsActivity");
+                        Intent intent7 = new Intent(MainActivity.this, VocationalTrainingCoursesActivity.class);
                         startActivity(intent7);
+                        break;
                     case 8:
-                        Intent intent8 = new Intent(MainActivity.this, EPassActivity.class);
+                        Intent intent8 = new Intent(MainActivity.this, CounsellingActivity.class);
                         startActivity(intent8);
                         break;
                     case 9:
-                        Intent intent9 = new Intent(MainActivity.this, DonateFundsActivity.class);
+                        Intent intent9 = new Intent(MainActivity.this, EPassActivity.class);
                         startActivity(intent9);
                         break;
                     case 10:
-                        Intent intent10 = new Intent(MainActivity.this, EPassActivity.class);
+                        Intent intent10 = new Intent(MainActivity.this, DonateFundsActivity.class);
                         startActivity(intent10);
+                        break;
+                    case 11:
+                        Intent intent11 = new Intent(MainActivity.this, DonateFundsActivity.class);
+                        startActivity(intent11);
+                        break;
+                    case 12:
+                        Intent intent12 = new Intent(MainActivity.this, DonateFundsActivity.class);
+                        startActivity(intent12);
+                        break;
+                    case 13:
+                        Intent intent13 = new Intent(MainActivity.this, DonateFundsActivity.class);
+                        startActivity(intent13);
+                        break;
+                    case 14:
+                        Intent intent14 = new Intent(MainActivity.this, DonateFundsActivity.class);
+                        startActivity(intent14);
                         break;
                 }
 
