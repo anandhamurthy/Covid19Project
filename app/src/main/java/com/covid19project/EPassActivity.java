@@ -8,7 +8,7 @@ import android.webkit.WebView;
 
 public class EPassActivity extends AppCompatActivity {
 
-    private String postUrl = "https://ereceipt.tn.gov.in";
+    private String postUrl = "https://www.covid19india.org/state/TN";
     private WebView webView;
 
     @Override

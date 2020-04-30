@@ -3,20 +3,40 @@ package com.covid19project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Switch;
-import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.covid19project.Adapter.ImageSliderAdapter;
+import com.covid19project.Models.Image_Slider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.smarteist.autoimageslider.IndicatorAnimations;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private GridView Grid_View;
+    private SliderView sliderView;
     private FloatingActionButton Call;
+    ImageSliderAdapter imageSliderAdapter;
+    private List<Image_Slider> image_sliders = new ArrayList<>();
+    private RequestQueue mRequestQueue;
     String[] web = {
             "Home Treatment",
             "My Health Status",
@@ -56,6 +76,19 @@ public class MainActivity extends AppCompatActivity {
         GridAdapter adapter = new GridAdapter(MainActivity.this, web, imageId);
         Grid_View=findViewById(R.id.grid_view);
         Call=findViewById(R.id.call);
+        sliderView = findViewById(R.id.image_slider);
+        mRequestQueue = Volley.newRequestQueue(this);
+
+        parseJSON();
+
+        sliderView.setIndicatorAnimation(IndicatorAnimations.WORM);
+        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+        sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
+        sliderView.setIndicatorSelectedColor(Color.WHITE);
+        sliderView.setIndicatorUnselectedColor(Color.GRAY);
+        sliderView.setScrollTimeInSec(4);
+        sliderView.startAutoCycle();
+
         Grid_View.setAdapter(adapter);
         Grid_View.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -124,5 +157,39 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void parseJSON() {
+        String url = "https://firebasestorage.googleapis.com/v0/b/covid19-project-c24e6.appspot.com/o/image_slider.json?alt=media&token=d4725d04-e0cc-4945-9551-72db4cf8e848";
+
+        JsonObjectRequest request = new JsonObjectRequest(url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("main");
+
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject hit = jsonArray.getJSONObject(i);
+                                String image = hit.getString("image");
+
+                                image_sliders.add(new Image_Slider(image));
+                            }
+
+                            imageSliderAdapter = new ImageSliderAdapter(MainActivity.this, image_sliders);
+                            sliderView.setSliderAdapter(imageSliderAdapter);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+        mRequestQueue.add(request);
     }
 }
