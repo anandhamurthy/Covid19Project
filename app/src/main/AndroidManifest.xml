@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TollNumbersActivity"></activity>
+        <activity android:name=".FAQsActivity"></activity>
+        <activity android:name=".AboutCoronaActivity" />
+        <activity android:name=".TollNumbersActivity" />
         <activity android:name=".ImageDetailedActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
