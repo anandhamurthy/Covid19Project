@@ -12,7 +12,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.covid19project.Adapter.TestLabsAdapter;
+import com.covid19project.Adapter.TollNumbersAdapter;
 import com.covid19project.Models.Test_Labs;
+import com.covid19project.Models.Toll_Numbers;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,7 +26,7 @@ import java.util.List;
 public class TollNumbersActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private List<Test_Labs> viewItems = new ArrayList<>();
+    private List<Toll_Numbers> viewItems = new ArrayList<>();
 
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -39,7 +41,6 @@ public class TollNumbersActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
-        mAdapter = new TestLabsAdapter(this, viewItems);
         mRecyclerView.setAdapter(mAdapter);
 
         mRequestQueue = Volley.newRequestQueue(this);
@@ -61,10 +62,10 @@ public class TollNumbersActivity extends AppCompatActivity {
                                 String emergency_number = hit.getString("emergency_number");
                                 String landline_number = hit.getString("landline_number");
 
-                                viewItems.add(new Test_Labs(district, emergency_number, landline_number));
+                                viewItems.add(new Toll_Numbers(district, emergency_number, landline_number));
                             }
 
-                            mAdapter = new TestLabsAdapter(TollNumbersActivity.this, viewItems);
+                            mAdapter = new TollNumbersAdapter(TollNumbersActivity.this, viewItems);
                             mRecyclerView.setAdapter(mAdapter);
 
                         } catch (JSONException e) {

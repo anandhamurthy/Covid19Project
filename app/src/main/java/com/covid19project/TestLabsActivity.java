@@ -43,7 +43,6 @@ public class TestLabsActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
-        mAdapter = new TestLabsAdapter(this, viewItems);
         mRecyclerView.setAdapter(mAdapter);
 
         mRequestQueue = Volley.newRequestQueue(this);
