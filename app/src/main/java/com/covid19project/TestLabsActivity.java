@@ -50,7 +50,7 @@ public class TestLabsActivity extends AppCompatActivity {
     }
 
     private void parseJSON() {
-        String url = "https://firebasestorage.googleapis.com/v0/b/covid19-project-c24e6.appspot.com/o/test_lab.json?alt=media&token=6b44be91-9e8d-4c99-b9e7-008f798b592a";
+        String url = "https://firebasestorage.googleapis.com/v0/b/covid19-project-c24e6.appspot.com/o/test_lab.json?alt=media&token=dafd6942-2cb1-497a-8fd0-3dfc6525db6e";
 
         JsonObjectRequest request = new JsonObjectRequest(url, null,
                 new Response.Listener<JSONObject>() {
