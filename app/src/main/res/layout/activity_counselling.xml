@@ -1,9 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CounsellingActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Counselling For Aged Peoples \n\n Timing Morning 10.00 AM to Evening 5.00 PM"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/colorBlack"
+            android:id="@+id/counselling_text"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/counselling_no_1"
+            android:text="044-28590804"
+            android:fontFamily="@font/nunito_bold"
+            android:textSize="18dp"
+            android:layout_below="@+id/counselling_text"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorAccent"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:layout_centerHorizontal="true"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/counselling_no_2"
+            android:text="044-28599188"
+            android:fontFamily="@font/nunito_bold"
+            android:textSize="18dp"
+            android:layout_below="@+id/counselling_no_1"
+            android:layout_margin="10dp"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorAccent"
+            android:padding="10dp"
+            android:layout_centerHorizontal="true"/>
+</RelativeLayout>

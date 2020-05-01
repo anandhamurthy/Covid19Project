@@ -67,7 +67,6 @@ public class ProfileActivity extends AppCompatActivity {
     private RadioButton Edit_Profile_Male, Edit_Profile_Female, Edit_Profile_Others;
     private FloatingActionButton Edit_Profile_Save;
     private TextView Edit_Profile_Phone_Number,Edit_Profile_State,Edit_Profile_Country;
-    private ImageView Edit_Profile_Back;
     private String Name;
     private EditText Edit_Profile_Name, Edit_Profile_Age, Edit_Profile_Email_Id, Edit_Profile_Address,
             Edit_Profile_City;
@@ -95,7 +94,6 @@ public class ProfileActivity extends AppCompatActivity {
         Edit_Profile_Female = findViewById(R.id.edit_profile_female);
         Edit_Profile_Others = findViewById(R.id.edit_profile_others);
         Edit_Profile_Save = findViewById(R.id.edit_profile_save);
-        Edit_Profile_Back = findViewById(R.id.edit_profile_back);
         Edit_Profile_Get_Location = findViewById(R.id.edit_profile_get_location);
 
         ActivityCompat.requestPermissions( this,
@@ -141,13 +139,6 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
-
-        Edit_Profile_Back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
             }
         });
 

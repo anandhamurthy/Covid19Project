@@ -4,7 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +16,7 @@ import com.covid19project.Models.Test_Labs;
 import com.covid19project.Models.Toll_Numbers;
 import com.covid19project.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TollNumbersAdapter extends RecyclerView.Adapter<TollNumbersAdapter.ImageViewHolder> {
@@ -47,6 +51,7 @@ public class TollNumbersAdapter extends RecyclerView.Adapter<TollNumbersAdapter.
     public int getItemCount() {
         return mToll_Numbers.size();
     }
+
 
 
     public class ImageViewHolder extends RecyclerView.ViewHolder {

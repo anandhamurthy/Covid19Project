@@ -1,10 +1,17 @@
 package com.covid19project;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
+import android.app.SearchManager;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -23,12 +30,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TollNumbersActivity extends AppCompatActivity {
+public class TollNumbersActivity extends AppCompatActivity{
 
     private RecyclerView mRecyclerView;
-    private List<Toll_Numbers> viewItems = new ArrayList<>();
+    private List<Toll_Numbers> viewItems;
 
-    private RecyclerView.Adapter mAdapter;
+    private TollNumbersAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private RequestQueue mRequestQueue;
 
@@ -37,19 +44,32 @@ public class TollNumbersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_toll_numbers);
 
+        Intent intent = getIntent();
+        String url = intent.getStringExtra("url");
+
         mRecyclerView = findViewById(R.id.toll_numbers_list);
         mRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setAdapter(mAdapter);
+        viewItems = new ArrayList<>();
+
+        final ProgressDialog Dialog = new ProgressDialog(TollNumbersActivity.this);
+        Dialog.setMessage("Loading...");
+        Dialog.setCanceledOnTouchOutside(false);
+        Dialog.show();
 
         mRequestQueue = Volley.newRequestQueue(this);
-        parseJSON();
+        parseJSON(url);
+
+        mAdapter = new TollNumbersAdapter(TollNumbersActivity.this, viewItems);
+        mRecyclerView.setAdapter(mAdapter);
+
+        Dialog.hide();
     }
 
-    private void parseJSON() {
+    private void parseJSON(String url1) {
         String url = "https://firebasestorage.googleapis.com/v0/b/covid19-project-c24e6.appspot.com/o/toll_numbers.json?alt=media&token=bf047ee9-705f-493a-9f98-06878697e75e";
-        JsonObjectRequest request = new JsonObjectRequest(url, null,
+        JsonObjectRequest request = new JsonObjectRequest(url1, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -81,4 +101,5 @@ public class TollNumbersActivity extends AppCompatActivity {
 
         mRequestQueue.add(request);
     }
+
 }
