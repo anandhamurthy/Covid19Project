@@ -47,9 +47,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
-    private String mCurrentUserId;
-    private DatabaseReference mUsersDatabase, mJsonDatabase;
+
+    private DatabaseReference mJsonDatabase;
 
     private GridView Grid_View;
     private SliderView sliderView;
@@ -107,140 +106,130 @@ public class MainActivity extends AppCompatActivity {
         sliderView.setScrollTimeInSec(4);
         sliderView.startAutoCycle();
 
-        mAuth = FirebaseAuth.getInstance();
+        //mAuth = FirebaseAuth.getInstance();
 
         final ProgressDialog Dialog = new ProgressDialog(MainActivity.this);
         Dialog.setMessage("Loading...");
         Dialog.setCanceledOnTouchOutside(false);
         Dialog.show();
 
-        if (mAuth.getCurrentUser() != null) {
+        mJsonDatabase = FirebaseDatabase.getInstance().getReference().child("Jsons");
+        mJsonDatabase.keepSynced(true);
 
-            mCurrentUserId = mAuth.getCurrentUser().getUid();
-            mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(mCurrentUserId);
-            mUsersDatabase.keepSynced(true);
+        Grid_View.setAdapter(adapter);
 
-            mJsonDatabase = FirebaseDatabase.getInstance().getReference().child("Jsons");
-            mJsonDatabase.keepSynced(true);
+        Call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:044-29510500"));
+                startActivity(intent);
+            }
+        });
 
-            Grid_View.setAdapter(adapter);
+        mJsonDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                final Jsons jsons = dataSnapshot.getValue(Jsons.class);
+                mRequestQueue = Volley.newRequestQueue(MainActivity.this);
+                parseJSON(jsons.getImage_slider());
 
-            Call.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(Intent.ACTION_DIAL);
-                    intent.setData(Uri.parse("tel:044-29510500"));
-                    startActivity(intent);
-                }
-            });
+                Grid_View.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            mJsonDatabase.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    final Jsons jsons = dataSnapshot.getValue(Jsons.class);
-                    mRequestQueue = Volley.newRequestQueue(MainActivity.this);
-                    parseJSON(jsons.getImage_slider());
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view,
+                                            int position, long id) {
+                        switch (position) {
+                            case 0:
+                                Intent intent0 = new Intent(MainActivity.this, CoronaActivity.class);
+                                startActivity(intent0);
+                                break;
+                            case 1:
+                                Intent intent = new Intent(MainActivity.this, HomeTreamentActivity.class);
+                                intent.putExtra("image_url",jsons.getHome_treatment_images());
+                                intent.putExtra("link_url",jsons.getHome_treatment_links());
+                                startActivity(intent);
+                                break;
 
-                    Grid_View.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            case 2:
+                                Intent intent1 = new Intent(MainActivity.this, TollNumbersActivity.class);
+                                intent1.putExtra("url",jsons.getToll_numbers());
+                                startActivity(intent1);
+                                break;
 
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view,
-                                                int position, long id) {
-                            switch (position) {
-                                case 0:
-                                    Intent intent0 = new Intent(MainActivity.this, CoronaActivity.class);
-                                    startActivity(intent0);
-                                    break;
-                                case 1:
-                                    Intent intent = new Intent(MainActivity.this, HomeTreamentActivity.class);
-                                    intent.putExtra("image_url",jsons.getHome_treatment_images());
-                                    intent.putExtra("link_url",jsons.getHome_treatment_links());
-                                    startActivity(intent);
-                                    break;
+                            case 3:
+                                Intent intent2 = new Intent(MainActivity.this, MyHealthStatusActivity.class);
+                                startActivity(intent2);
+                                break;
 
-                                case 2:
-                                    Intent intent1 = new Intent(MainActivity.this, TollNumbersActivity.class);
-                                    intent1.putExtra("url",jsons.getToll_numbers());
-                                    startActivity(intent1);
-                                    break;
+                            case 4:
+                                Intent intent3 = new Intent(MainActivity.this, MedicalStoresActivity.class);
+                                startActivity(intent3);
+                                break;
 
-                                case 3:
-                                    Intent intent2 = new Intent(MainActivity.this, MyHealthStatusActivity.class);
-                                    startActivity(intent2);
-                                    break;
+                            case 5:
+                                String vol = "https://stopcorona.xenovex.com/login";
+                                Intent i = new Intent(Intent.ACTION_VIEW);
+                                i.setData(Uri.parse(vol));
+                                startActivity(i);
+                                break;
 
-                                case 4:
-                                    Intent intent3 = new Intent(MainActivity.this, MedicalStoresActivity.class);
-                                    startActivity(intent3);
-                                    break;
+                            case 6:
+                                Intent intent5 = new Intent(MainActivity.this, TestLabsActivity.class);
+                                intent5.putExtra("url",jsons.getLab_test());
+                                startActivity(intent5);
+                                break;
 
-                                case 5:
-                                    String vol = "https://stopcorona.xenovex.com/login";
-                                    Intent i = new Intent(Intent.ACTION_VIEW);
-                                    i.setData(Uri.parse(vol));
-                                    startActivity(i);
-                                    break;
+                            case 7:
+                                Intent intent6 = new Intent(MainActivity.this, CounsellingActivity.class);
+                                startActivity(intent6);
+                                break;
 
-                                case 6:
-                                    Intent intent5 = new Intent(MainActivity.this, TestLabsActivity.class);
-                                    intent5.putExtra("url",jsons.getLab_test());
-                                    startActivity(intent5);
-                                    break;
+                            case 8:
+                                String url = "https://serviceonline.gov.in/tamilnadu/directApply.do?serviceId=721";
+                                Intent intent7 = new Intent(Intent.ACTION_VIEW);
+                                intent7.setData(Uri.parse(url));
+                                startActivity(intent7);
+                                break;
 
-                                case 7:
-                                    Intent intent6 = new Intent(MainActivity.this, CounsellingActivity.class);
-                                    startActivity(intent6);
-                                    break;
+                            case 9:
+                                Intent intent8 = new Intent(MainActivity.this, DonateFundsActivity.class);
+                                startActivity(intent8);
+                                break;
 
-                                case 8:
-                                    String url = "https://serviceonline.gov.in/tamilnadu/directApply.do?serviceId=721";
-                                    Intent intent7 = new Intent(Intent.ACTION_VIEW);
-                                    intent7.setData(Uri.parse(url));
-                                    startActivity(intent7);
-                                    break;
-
-                                case 9:
-                                    Intent intent8 = new Intent(MainActivity.this, DonateFundsActivity.class);
-                                    startActivity(intent8);
-                                    break;
-
-                                case 10:
-                                    Intent intent9 = new Intent(MainActivity.this, DonateMaterialsActivity.class);
-                                    intent9.putExtra("drug_url",jsons.getDonate_drug());
-                                    intent9.putExtra("relief_url",jsons.getDonate_relief());
-                                    startActivity(intent9);
-                                    break;
-                                case 11:
-                                    String tracker = "https://serviceonline.gov.in/tamilnadu/citizenApplication.html";
-                                    Intent intent10 = new Intent(Intent.ACTION_VIEW);
-                                    intent10.setData(Uri.parse(tracker));
-                                    startActivity(intent10);
-                                    break;
-                                case 12:
-                                    String faq = "https://firebasestorage.googleapis.com/v0/b/covid19-project-c24e6.appspot.com/o/FAQ_COVID-19_25.03.2020.pdf?alt=media&token=ce1a5574-5c16-449d-b094-5f102b84b051";
-                                    Intent intent11 = new Intent(Intent.ACTION_VIEW);
-                                    intent11.setData(Uri.parse(faq));
-                                    startActivity(intent11);
-                                    break;
-
-                            }
+                            case 10:
+                                Intent intent9 = new Intent(MainActivity.this, DonateMaterialsActivity.class);
+                                intent9.putExtra("drug_url",jsons.getDonate_drug());
+                                intent9.putExtra("relief_url",jsons.getDonate_relief());
+                                startActivity(intent9);
+                                break;
+                            case 11:
+                                String tracker = "https://serviceonline.gov.in/tamilnadu/citizenApplication.html";
+                                Intent intent10 = new Intent(Intent.ACTION_VIEW);
+                                intent10.setData(Uri.parse(tracker));
+                                startActivity(intent10);
+                                break;
+                            case 12:
+                                String faq = "https://firebasestorage.googleapis.com/v0/b/covid19-project-c24e6.appspot.com/o/FAQ_COVID-19_25.03.2020.pdf?alt=media&token=ce1a5574-5c16-449d-b094-5f102b84b051";
+                                Intent intent11 = new Intent(Intent.ACTION_VIEW);
+                                intent11.setData(Uri.parse(faq));
+                                startActivity(intent11);
+                                break;
 
                         }
-                    });
+
+                    }
+                });
 
 
-                    Dialog.hide();
-                }
+                Dialog.hide();
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                }
-            });
-
-
-        }
-
+            }
+        });
     }
 
     private void parseJSON(String image_slider) {
@@ -277,72 +266,72 @@ public class MainActivity extends AppCompatActivity {
         mRequestQueue.add(request);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser mCurrentUser = mAuth.getCurrentUser();
-
-        if (mCurrentUser == null) {
-
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-
-        }
-        else{
-            FirebaseAuth auth = FirebaseAuth.getInstance();
-            mUsersDatabase = FirebaseDatabase.getInstance().getReference("Users").child(auth.getCurrentUser().getUid());
-            mUsersDatabase.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    Users user = dataSnapshot.getValue(Users.class);
-                    if (user.getVerified().equals("false")) {
-                        Intent setupIntent = new Intent(MainActivity.this, ProfileActivity.class);
-                        setupIntent.putExtra("access","false");
-                        setupIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(setupIntent);
-                        finish();
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id){
-            case R.id.profile:
-                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
-                intent.putExtra("access","true");
-                startActivity(intent);
-                return true;
-            case R.id.logout:
-                FirebaseAuth.getInstance().signOut();
-                sendToLogin();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-
-    }
-
-    private void sendToLogin() {
-        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(loginIntent);
-        finish();
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        FirebaseUser mCurrentUser = mAuth.getCurrentUser();
+//
+//        if (mCurrentUser == null) {
+//
+//            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//            startActivity(intent);
+//            finish();
+//
+//        }
+//        else{
+//            FirebaseAuth auth = FirebaseAuth.getInstance();
+//            mUsersDatabase = FirebaseDatabase.getInstance().getReference("Users").child(auth.getCurrentUser().getUid());
+//            mUsersDatabase.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot) {
+//                    Users user = dataSnapshot.getValue(Users.class);
+//                    if (user.getVerified().equals("false")) {
+//                        Intent setupIntent = new Intent(MainActivity.this, ProfileActivity.class);
+//                        setupIntent.putExtra("access","false");
+//                        setupIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                        startActivity(setupIntent);
+//                        finish();
+//                    }
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError databaseError) {
+//
+//                }
+//            });
+//        }
+//    }
+//
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//        switch (id){
+//            case R.id.profile:
+//                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+//                intent.putExtra("access","true");
+//                startActivity(intent);
+//                return true;
+//            case R.id.logout:
+//                FirebaseAuth.getInstance().signOut();
+//                sendToLogin();
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//
+//    }
+//
+//    private void sendToLogin() {
+//        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+//        startActivity(loginIntent);
+//        finish();
+//    }
 
 }
