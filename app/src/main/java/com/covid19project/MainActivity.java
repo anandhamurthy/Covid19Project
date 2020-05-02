@@ -106,8 +106,6 @@ public class MainActivity extends AppCompatActivity {
         sliderView.setScrollTimeInSec(4);
         sliderView.startAutoCycle();
 
-        //mAuth = FirebaseAuth.getInstance();
-
         final ProgressDialog Dialog = new ProgressDialog(MainActivity.this);
         Dialog.setMessage("Loading...");
         Dialog.setCanceledOnTouchOutside(false);
