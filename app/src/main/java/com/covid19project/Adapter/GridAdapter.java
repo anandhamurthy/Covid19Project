@@ -1,4 +1,4 @@
-package com.covid19project;
+package com.covid19project.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.covid19project.R;
 
 public class GridAdapter extends BaseAdapter {
     private Context mContext;

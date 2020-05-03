@@ -2,27 +2,32 @@ package com.covid19project.Models;
 
 public class Jsons {
 
-    String image_slider, home_treatment_images, home_treatment_links, toll_numbers, lab_test, donate_drug, donate_relief;
+    String videos, home_treatment_images, home_treatment_links, toll_numbers, lab_test, donate_drug, donate_relief, tweets, faq, selfreport, epass, tracker;
 
     public Jsons() {
     }
 
-    public Jsons(String image_slider, String home_treatment_images, String home_treatment_links, String toll_numbers, String lab_test, String donate_drug, String donate_relief) {
-        this.image_slider = image_slider;
+    public Jsons(String videos, String home_treatment_images, String home_treatment_links, String toll_numbers, String lab_test, String donate_drug, String donate_relief, String tweets, String faq, String selfreport, String epass, String tracker) {
+        this.videos = videos;
         this.home_treatment_images = home_treatment_images;
         this.home_treatment_links = home_treatment_links;
         this.toll_numbers = toll_numbers;
         this.lab_test = lab_test;
         this.donate_drug = donate_drug;
         this.donate_relief = donate_relief;
+        this.tweets = tweets;
+        this.faq = faq;
+        this.selfreport = selfreport;
+        this.epass = epass;
+        this.tracker = tracker;
     }
 
-    public String getImage_slider() {
-        return image_slider;
+    public String getVideos() {
+        return videos;
     }
 
-    public void setImage_slider(String image_slider) {
-        this.image_slider = image_slider;
+    public void setVideos(String videos) {
+        this.videos = videos;
     }
 
     public String getHome_treatment_images() {
@@ -71,5 +76,45 @@ public class Jsons {
 
     public void setDonate_relief(String donate_relief) {
         this.donate_relief = donate_relief;
+    }
+
+    public String getTweets() {
+        return tweets;
+    }
+
+    public void setTweets(String tweets) {
+        this.tweets = tweets;
+    }
+
+    public String getFaq() {
+        return faq;
+    }
+
+    public void setFaq(String faq) {
+        this.faq = faq;
+    }
+
+    public String getSelfreport() {
+        return selfreport;
+    }
+
+    public void setSelfreport(String selfreport) {
+        this.selfreport = selfreport;
+    }
+
+    public String getEpass() {
+        return epass;
+    }
+
+    public void setEpass(String epass) {
+        this.epass = epass;
+    }
+
+    public String getTracker() {
+        return tracker;
+    }
+
+    public void setTracker(String tracker) {
+        this.tracker = tracker;
     }
 }

@@ -1,4 +1,4 @@
-package com.covid19project;
+package com.covid19project.Login;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.covid19project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskExecutors;
@@ -80,7 +81,7 @@ public class VerifyActivity extends AppCompatActivity {
 
     private void signInWithCredential(PhoneAuthCredential credential) {
         final ProgressDialog pd = new ProgressDialog(VerifyActivity.this);
-        pd.setMessage("Uploading");
+        pd.setMessage("Logging in.");
         pd.show();
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {

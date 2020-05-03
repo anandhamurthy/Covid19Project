@@ -7,10 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.widget.Toast;
+import android.view.View;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -19,10 +18,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.covid19project.Adapter.ImageSliderAdapter;
 import com.covid19project.Adapter.LinkAdapter;
-import com.covid19project.Adapter.VideoAdapter;
 import com.covid19project.Models.Image_Slider;
 import com.covid19project.Models.Link;
-import com.covid19project.Models.Video;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;
@@ -39,7 +36,6 @@ public class HomeTreamentActivity extends AppCompatActivity {
 
     private SliderView sliderView;
     ImageSliderAdapter imageSliderAdapter;
-    VideoAdapter videoAdapter;
     LinkAdapter linkAdapter;
     private RecyclerView Link_List;
     private List<Image_Slider> image_sliders = new ArrayList<>();
@@ -47,6 +43,8 @@ public class HomeTreamentActivity extends AppCompatActivity {
     private RequestQueue mRequestQueue;
 
     private RecyclerView.LayoutManager layoutManagerLink;
+
+    private FloatingActionButton Call;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +55,7 @@ public class HomeTreamentActivity extends AppCompatActivity {
         String image_url = intent.getStringExtra("image_url");
         String link_url = intent.getStringExtra("link_url");
 
+        Call=findViewById(R.id.call);
         sliderView = findViewById(R.id.image_slider);
         Link_List = findViewById(R.id.link_list);
         Link_List.setHasFixedSize(true);
@@ -76,9 +75,17 @@ public class HomeTreamentActivity extends AppCompatActivity {
         Dialog.setCanceledOnTouchOutside(false);
         Dialog.show();
 
+        Call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:044-29510500"));
+                startActivity(intent);
+            }
+        });
+
         mRequestQueue = Volley.newRequestQueue(this);
         parseJSONImages(image_url);
-      //  parseJSONVideos();
         parseJSONLinks(link_url);
 
         Dialog.hide();
@@ -118,43 +125,6 @@ public class HomeTreamentActivity extends AppCompatActivity {
 
         mRequestQueue.add(request);
     }
-//
-//    private void parseJSONVideos() {
-//        String url = "https://firebasestorage.googleapis.com/v0/b/covid19-project-c24e6.appspot.com/o/videos.json?alt=media&token=fd0245b9-9805-4542-b671-aeaa7039a25d";
-//
-//        JsonObjectRequest request = new JsonObjectRequest(url, null,
-//                new Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        try {
-//                            JSONArray jsonArray1 = response.getJSONArray("video_data");
-//                            Toast.makeText(HomeTreamentActivity.this, jsonArray1.toString(), Toast.LENGTH_SHORT).show();
-//
-//                            for (int i = 0; i < jsonArray1.length(); i++) {
-//                                JSONObject hit = jsonArray1.getJSONObject(i);
-//                                String video = hit.getString("video");
-//
-//                                videos.add(new Video(video));
-//                            }
-//
-//                            videoAdapter = new VideoAdapter(HomeTreamentActivity.this, videos);
-//                            Video_List.setAdapter(videoAdapter);
-//
-//
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                error.printStackTrace();
-//            }
-//        });
-//
-//        mRequestQueue.add(request);
-//    }
 
     private void parseJSONLinks(String link_url) {
         String url = "https://firebasestorage.googleapis.com/v0/b/covid19-project-c24e6.appspot.com/o/links.json?alt=media&token=96128da8-4ed4-409a-9c32-1ac0071a24dd";

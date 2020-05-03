@@ -2,6 +2,7 @@ package com.covid19project;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -27,9 +28,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class MedicalStoresActivity extends FragmentActivity implements OnMapReadyCallback,
+public class HealthCareActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
@@ -46,7 +46,7 @@ public class MedicalStoresActivity extends FragmentActivity implements OnMapRead
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_medical_stores);
+        setContentView(R.layout.activity_health_care);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkUserLocationPermission();
@@ -57,37 +57,26 @@ public class MedicalStoresActivity extends FragmentActivity implements OnMapRead
         mapFragment.getMapAsync(this);
 
     }
-        public void onClick(View v){
+    public void onClick(View v){
 
-            Object transferData[] = new Object[3];
-            GetNearbyPlaces getNearbyPlaces = new GetNearbyPlaces();
+        Object transferData[] = new Object[3];
+        GetNearbyPlaces getNearbyPlaces = new GetNearbyPlaces();
 
 
-            switch (v.getId()) {
-                case R.id.medical_store:
-                    //mMap.clear();
-                    String medical_store_url = getUrl(latitide, longitude, "drugstore");
-                    transferData[0] = mMap;
-                    transferData[1] = medical_store_url;
-                    transferData[2] = "medical_store";
+        switch (v.getId()) {
+            case R.id.healthcare:
+                //mMap.clear();
+                String medical_store_url = getUrl(latitide, longitude, "hospital");
+                transferData[0] = mMap;
+                transferData[1] = medical_store_url;
+                transferData[2] = "medical_store";
 
-                    getNearbyPlaces.execute(transferData);
-                    Toast.makeText(this, "Searching for Nearby Medical Store", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(this, "Showing Nearby Medical Store", Toast.LENGTH_SHORT).show();
-                    break;
+                getNearbyPlaces.execute(transferData);
+                Toast.makeText(this, "Searching for Nearby Health Care", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Showing Nearby Health Care", Toast.LENGTH_SHORT).show();
+                break;
 
-                case R.id.pharmacy:
-                    //mMap.clear();
-                    String pharmacy_url = getUrl(latitide, longitude, "pharmacy");
-                    transferData[0] = mMap;
-                    transferData[1] = pharmacy_url;
-                    transferData[2] = "pharmacy";
-                    getNearbyPlaces.execute(transferData);
-                    Toast.makeText(this, "Searching for Nearby Pharmacy", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(this, "Showing Nearby Pharmacy", Toast.LENGTH_SHORT).show();
-                    break;
-
-            }
+        }
 
     }
 

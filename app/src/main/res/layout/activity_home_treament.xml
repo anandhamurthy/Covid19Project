@@ -41,6 +41,15 @@
 
 
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:tint="@color/colorWhite"
+        android:layout_alignParentRight="true"
+        android:layout_margin="28dp"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/call" />
 
 
 </RelativeLayout>

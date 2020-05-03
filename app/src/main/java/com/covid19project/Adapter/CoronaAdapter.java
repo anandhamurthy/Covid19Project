@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +15,7 @@ import com.covid19project.Models.Corona;
 import com.covid19project.Models.FAQ;
 import com.covid19project.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CoronaAdapter extends RecyclerView.Adapter<CoronaAdapter.ImageViewHolder> {
@@ -58,5 +61,4 @@ public class CoronaAdapter extends RecyclerView.Adapter<CoronaAdapter.ImageViewH
             Confirmed = itemView.findViewById(R.id.confirmed);
         }
     }
-
 }

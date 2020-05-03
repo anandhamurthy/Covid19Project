@@ -1,12 +1,13 @@
-package com.covid19project;
+package com.covid19project.Login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.WindowManager;
+
+import com.covid19project.MainActivity;
+import com.covid19project.R;
 
 public class SplashActivity extends AppCompatActivity {
 

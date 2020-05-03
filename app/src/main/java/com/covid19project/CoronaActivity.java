@@ -4,9 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -18,6 +23,8 @@ import com.covid19project.Adapter.CoronaAdapter;
 import com.covid19project.Adapter.FAQAdapter;
 import com.covid19project.Models.Corona;
 import com.covid19project.Models.FAQ;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,14 +33,17 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.covid19project.Covid19Project.getInstance;
+
 public class CoronaActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private List<Corona> viewItems = new ArrayList<>();
+    private List<Corona> viewItems;
 
-    private RecyclerView.Adapter mAdapter;
+    private CoronaAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private RequestQueue mRequestQueue;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +54,10 @@ public class CoronaActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
+        viewItems = new ArrayList<>();
+
+        mAdapter = new CoronaAdapter(CoronaActivity.this, viewItems);
+        mRecyclerView.setAdapter(mAdapter);
 
         mRequestQueue = Volley.newRequestQueue(this);
         parseJSON();
@@ -65,10 +79,10 @@ public class CoronaActivity extends AppCompatActivity {
                                 String confirmed = hit.getString("confirmed");
 
                                 viewItems.add(new Corona(district, confirmed));
+                                mAdapter.notifyDataSetChanged();
                             }
+                            mAdapter.notifyDataSetChanged();
 
-                            mAdapter = new CoronaAdapter(CoronaActivity.this, viewItems);
-                            mRecyclerView.setAdapter(mAdapter);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -82,6 +96,7 @@ public class CoronaActivity extends AppCompatActivity {
         });
 
         mRequestQueue.add(request);
+        mAdapter.notifyDataSetChanged();
     }
 
 }

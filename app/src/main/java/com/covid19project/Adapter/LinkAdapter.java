@@ -5,18 +5,14 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.covid19project.ImageDetailedActivity;
 import com.covid19project.Models.Link;
-import com.covid19project.Models.Video;
 import com.covid19project.R;
-import com.covid19project.WebViewActivity;
+import com.covid19project.Services.WebViewActivity;
 
 import java.util.List;
 

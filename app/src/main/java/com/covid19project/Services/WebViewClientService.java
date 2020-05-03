@@ -1,4 +1,4 @@
-package com.covid19project;
+package com.covid19project.Services;
 
 import android.app.Activity;
 import android.content.Intent;
