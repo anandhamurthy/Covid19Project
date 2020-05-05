@@ -169,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
                             switch (position) {
                                 case 0:
                                     Intent intent0 = new Intent(MainActivity.this, CoronaActivity.class);
+                                    intent0.putExtra("url", jsons.getCorona());
                                     startActivity(intent0);
                                     break;
                                 case 1:

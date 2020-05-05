@@ -53,6 +53,9 @@ public class CoronaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_corona);
 
+        Intent intent = getIntent();
+        String url = intent.getStringExtra("url");
+
         Back= findViewById(R.id.toolbar_icon);
         mRecyclerView = findViewById(R.id.corona_list);
         mRecyclerView.setHasFixedSize(true);
@@ -72,13 +75,13 @@ public class CoronaActivity extends AppCompatActivity {
         });
 
         mRequestQueue = Volley.newRequestQueue(this);
-        parseJSON();
+        parseJSON(url);
     }
 
-    private void parseJSON() {
+    private void parseJSON(String url1) {
         String url = "https://firebasestorage.googleapis.com/v0/b/covid19-project-c24e6.appspot.com/o/tn.json?alt=media&token=1c558046-f612-4b87-a8f9-92a0effc85b6";
 
-        JsonObjectRequest request = new JsonObjectRequest(url, null,
+        JsonObjectRequest request = new JsonObjectRequest(url1, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

@@ -3,12 +3,12 @@ package com.covid19project.Models;
 public class Jsons {
 
     String videos, home_treatment_images, home_treatment_links, toll_numbers, lab_test,
-            donate_drug, donate_relief, tweets, faq, selfreport, epass, tracker, migrant;
+            donate_drug, donate_relief, tweets, faq, selfreport, epass, tracker, migrant, corona;
 
     public Jsons() {
     }
 
-    public Jsons(String videos, String home_treatment_images, String home_treatment_links, String toll_numbers, String lab_test, String donate_drug, String donate_relief, String tweets, String faq, String selfreport, String epass, String tracker, String migrant) {
+    public Jsons(String videos, String home_treatment_images, String home_treatment_links, String toll_numbers, String lab_test, String donate_drug, String donate_relief, String tweets, String faq, String selfreport, String epass, String tracker, String migrant, String corona) {
         this.videos = videos;
         this.home_treatment_images = home_treatment_images;
         this.home_treatment_links = home_treatment_links;
@@ -22,6 +22,7 @@ public class Jsons {
         this.epass = epass;
         this.tracker = tracker;
         this.migrant = migrant;
+        this.corona = corona;
     }
 
     public String getVideos() {
@@ -126,5 +127,13 @@ public class Jsons {
 
     public void setMigrant(String migrant) {
         this.migrant = migrant;
+    }
+
+    public String getCorona() {
+        return corona;
+    }
+
+    public void setCorona(String corona) {
+        this.corona = corona;
     }
 }
