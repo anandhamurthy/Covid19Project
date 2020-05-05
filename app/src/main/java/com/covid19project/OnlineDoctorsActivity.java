@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -48,6 +49,7 @@ public class OnlineDoctorsActivity extends AppCompatActivity implements PersonAd
     private DatabaseReference mPersonsDatabase;
     private FirebaseUser mCurrentUser;
 
+    private ImageView Back;
     private SearchView searchView;
 
     @Override
@@ -61,6 +63,7 @@ public class OnlineDoctorsActivity extends AppCompatActivity implements PersonAd
         mCurrentUser = mAuth.getCurrentUser();
         mNoPersons = findViewById(R.id.no_persons);
         mPersonList = findViewById(R.id.volunteer_list);
+        Back = findViewById(R.id.toolbar_icon);
 
         mPersonsDatabase = FirebaseDatabase.getInstance().getReference().child("Persons");
         mPersonsDatabase.keepSynced(true);
@@ -73,6 +76,14 @@ public class OnlineDoctorsActivity extends AppCompatActivity implements PersonAd
         mPersonList.setAdapter(personAdapter);
 
         readPersons("Doctor Online Appointment");
+
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(OnlineDoctorsActivity.this, MainActivity.class));
+                finish();
+            }
+        });
 
         Add.setOnClickListener(new View.OnClickListener() {
             @Override

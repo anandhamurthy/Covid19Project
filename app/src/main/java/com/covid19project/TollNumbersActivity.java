@@ -12,6 +12,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -39,6 +41,8 @@ public class TollNumbersActivity extends AppCompatActivity{
     private RecyclerView.LayoutManager layoutManager;
     private RequestQueue mRequestQueue;
 
+    private ImageView Back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,11 +51,20 @@ public class TollNumbersActivity extends AppCompatActivity{
         Intent intent = getIntent();
         String url = intent.getStringExtra("url");
 
+        Back = findViewById(R.id.toolbar_icon);
         mRecyclerView = findViewById(R.id.toll_numbers_list);
         mRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
         viewItems = new ArrayList<>();
+
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(TollNumbersActivity.this, MainActivity.class));
+                finish();
+            }
+        });
 
         final ProgressDialog Dialog = new ProgressDialog(TollNumbersActivity.this);
         Dialog.setMessage("Loading...");

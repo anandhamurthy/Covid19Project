@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -20,7 +21,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.covid19project.Adapter.PersonAdapter;
 import com.covid19project.ConfirmActivity;
+import com.covid19project.MainActivity;
 import com.covid19project.Models.Persons;
+import com.covid19project.OrphanageSupportActivity;
 import com.covid19project.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -57,7 +60,6 @@ public class DeliveryActivity extends AppCompatActivity implements PersonAdapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delivery);
 
-
         mAuth = FirebaseAuth.getInstance();
         Add = findViewById(R.id.add);
         mAuth = FirebaseAuth.getInstance();
@@ -74,6 +76,7 @@ public class DeliveryActivity extends AppCompatActivity implements PersonAdapter
         personsList = new ArrayList<>();
         personAdapter = new PersonAdapter(this, personsList, this);
         mPersonList.setAdapter(personAdapter);
+
 
         readPersons();
 

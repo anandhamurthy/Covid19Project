@@ -54,8 +54,8 @@ public class FAQAdapter extends RecyclerView.Adapter<FAQAdapter.ImageViewHolder>
         public ImageViewHolder(View itemView) {
             super(itemView);
 
-            Question = itemView.findViewById(R.id.lab_name);
-            Answer = itemView.findViewById(R.id.location);
+            Question = itemView.findViewById(R.id.question);
+            Answer = itemView.findViewById(R.id.answer);
         }
     }
 

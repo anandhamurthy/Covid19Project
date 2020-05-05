@@ -4,8 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/counselling_bg"
     tools:context=".CounsellingActivity">
 
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:id="@+id/toolbar"
+            android:background="@drawable/rounded">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/toolbar_icon"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/back"
+                    android:layout_marginLeft="10dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_bold"
+                    android:layout_toEndOf="@+id/toolbar_icon"
+                    android:layout_centerVertical="true"
+                    android:textSize="20dp"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@color/colorBlack"
+                    android:text="Counselling"
+                    android:layout_toRightOf="@+id/toolbar_icon"
+                    android:layout_marginLeft="10dp" />
+
+        </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -15,6 +47,7 @@
             android:textColor="@color/colorBlack"
             android:id="@+id/counselling_text"
             android:gravity="center"
+            android:layout_below="@+id/toolbar"
             android:textSize="20dp"
             android:layout_centerHorizontal="true"
             android:layout_margin="10dp"/>

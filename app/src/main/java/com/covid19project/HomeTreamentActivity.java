@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -45,6 +46,7 @@ public class HomeTreamentActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManagerLink;
 
     private FloatingActionButton Call;
+    private ImageView Back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class HomeTreamentActivity extends AppCompatActivity {
         String image_url = intent.getStringExtra("image_url");
         String link_url = intent.getStringExtra("link_url");
 
+        Back = findViewById(R.id.toolbar_icon);
         Call=findViewById(R.id.call);
         sliderView = findViewById(R.id.image_slider);
         Link_List = findViewById(R.id.link_list);
@@ -81,6 +84,14 @@ public class HomeTreamentActivity extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
                 intent.setData(Uri.parse("tel:044-29510500"));
                 startActivity(intent);
+            }
+        });
+
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeTreamentActivity.this, MainActivity.class));
+                finish();
             }
         });
 

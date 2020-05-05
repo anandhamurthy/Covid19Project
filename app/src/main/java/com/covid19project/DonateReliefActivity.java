@@ -12,6 +12,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -39,6 +41,8 @@ public class DonateReliefActivity extends AppCompatActivity{
     private RecyclerView.LayoutManager layoutManager;
     private RequestQueue mRequestQueue;
 
+    private ImageView Back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,11 +51,20 @@ public class DonateReliefActivity extends AppCompatActivity{
         Intent intent = getIntent();
         final String relief_url = intent.getStringExtra("url");
 
+        Back= findViewById(R.id.toolbar_icon);
         mRecyclerView = findViewById(R.id.donate_relief_list);
         mRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
+
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DonateReliefActivity.this, MainActivity.class));
+                finish();
+            }
+        });
 
         final ProgressDialog Dialog = new ProgressDialog(DonateReliefActivity.this);
         Dialog.setMessage("Loading...");

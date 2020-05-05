@@ -12,6 +12,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -21,6 +23,7 @@ import com.android.volley.toolbox.Volley;
 import com.covid19project.Adapter.DonateDrugAdapter;
 import com.covid19project.Adapter.TollNumbersAdapter;
 import com.covid19project.Models.DonateDrug;
+import com.covid19project.Models.DonateRelief;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,6 +41,7 @@ public class DonateDrugActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private RequestQueue mRequestQueue;
 
+    private ImageView Back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +50,7 @@ public class DonateDrugActivity extends AppCompatActivity {
         Intent intent = getIntent();
         final String drug_url = intent.getStringExtra("url");
 
-
+        Back = findViewById(R.id.toolbar_icon);
         mRecyclerView = findViewById(R.id.donate_drug_list);
         mRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
@@ -59,6 +63,13 @@ public class DonateDrugActivity extends AppCompatActivity {
         Dialog.setCanceledOnTouchOutside(false);
         Dialog.show();
 
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DonateDrugActivity.this, MainActivity.class));
+                finish();
+            }
+        });
         mRequestQueue = Volley.newRequestQueue(this);
         parseJSON(drug_url);
 

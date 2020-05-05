@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.covid19project.ConfirmActivity;
+import com.covid19project.MainActivity;
 import com.covid19project.Models.Persons;
 import com.covid19project.Adapter.PersonAdapter;
 import com.covid19project.R;
@@ -51,6 +53,7 @@ public class FreeFoodActivity extends AppCompatActivity implements PersonAdapter
     private FirebaseUser mCurrentUser;
 
     private SearchView searchView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

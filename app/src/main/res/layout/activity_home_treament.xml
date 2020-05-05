@@ -3,13 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/hometreatment_bg"
     android:layout_height="match_parent"
     tools:context=".HomeTreamentActivity">
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:id="@+id/toolbar"
+        android:background="@drawable/rounded">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/toolbar_icon"
+            android:layout_centerVertical="true"
+            android:backgroundTint="@color/colorWhite"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/back"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
+            android:layout_toEndOf="@+id/toolbar_icon"
+            android:layout_centerVertical="true"
+            android:textSize="20dp"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/colorBlack"
+            android:text="Home Treatment"
+            android:layout_toRightOf="@+id/toolbar_icon"
+            android:layout_marginLeft="10dp" />
+
+    </RelativeLayout>
 
     <androidx.cardview.widget.CardView
         app:cardCornerRadius="6dp"
         android:layout_margin="5dp"
         android:id="@+id/image_slider_card_view"
+        android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="250dp">
 
@@ -25,17 +60,18 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Links"
+        android:text="External Links"
         android:fontFamily="@font/nunito_bold"
-        android:textSize="15dp"
+        android:textSize="20dp"
         android:textColor="@color/colorBlack"
         android:layout_below="@+id/image_slider_card_view"
         android:id="@+id/link_text"
-        android:layout_margin="5dp"/>
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/link_list"
         android:layout_below="@+id/link_text"/>
 

@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/app_bg"
     tools:context=".OrphanageSupport.HomesActivity">
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -22,8 +24,9 @@
             android:layout_height="match_parent"
             android:fontFamily="@font/nunito"
             android:gravity="center"
+            android:layout_margin="20dp"
             android:text="No Volunteers for Free Homes Yet. Click + to add your Homes"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorWhite"
             android:textSize="20dp" />
 
     </RelativeLayout>

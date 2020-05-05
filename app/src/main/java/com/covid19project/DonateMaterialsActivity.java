@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class DonateMaterialsActivity extends AppCompatActivity {
 
     private Button Drug, Relief;
+    private ImageView Back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,15 @@ public class DonateMaterialsActivity extends AppCompatActivity {
 
         Drug = findViewById(R.id.donate_drug);
         Relief = findViewById(R.id.donate_relief);
+        Back = findViewById(R.id.toolbar_icon);
+
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DonateMaterialsActivity.this, MainActivity.class));
+                finish();
+            }
+        });
 
         Drug.setOnClickListener(new View.OnClickListener() {
             @Override

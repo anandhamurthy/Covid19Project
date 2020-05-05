@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.covid19project">
-    <!--
-         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
-         Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality.
-    -->
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+<!--    <uses-permission android:name="com.google.android.providers.gsf.permisson.READ_GSERVICES"/>-->
 
     <application
         android:allowBackup="true"
@@ -16,6 +14,16 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".Login.SplashActivity"
+            android:theme="@style/AppThemeDonate">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".TweetsActivity"
             android:label="Tweets"/>
         <activity android:name=".OnlineDoctorsActivity"
@@ -31,6 +39,7 @@
             android:label="Confirm Your Details" />
         <activity
             android:name=".OrphanageSupport.FreeFoodActivity"
+            android:theme="@style/AppThemeOrphanage"
             android:label="Free Foods">
             <meta-data
                 android:name="android.app.searchable"
@@ -42,6 +51,7 @@
         </activity>
         <activity
             android:name=".OrphanageSupport.HomesActivity"
+            android:theme="@style/AppThemeOrphanage"
             android:label="Free Accommodations Homes">
             <meta-data
                 android:name="android.app.searchable"
@@ -53,6 +63,7 @@
         </activity>
         <activity
             android:name=".OrphanageSupport.DeliveryActivity"
+            android:theme="@style/AppThemeOrphanage"
             android:label="Free Delivery">
             <meta-data
                 android:name="android.app.searchable"
@@ -101,10 +112,12 @@
         <activity
             android:name=".Login.VerifyActivity"
             android:label="Verify"
+            android:theme="@style/AppThemeDonate"
             android:screenOrientation="unspecified" />
         <activity
             android:name=".Login.LoginActivity"
             android:label="Login"
+            android:theme="@style/AppThemeDonate"
             android:screenOrientation="unspecified" />
 
         <meta-data
@@ -117,24 +130,17 @@
         <activity
             android:name=".MedicalStoresActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".FAQsActivity" />
+        <activity android:name=".FAQsActivity"
+            android:label="FAQs"
+            android:screenOrientation="unspecified"/>
         <activity
             android:name=".TollNumbersActivity"
             android:label="Toll Free Numbers"
-            android:screenOrientation="sensor" />
+            android:screenOrientation="unspecified" />
         <activity
             android:name=".ImageDetailedActivity"
             android:label="Image Zoom"
             android:screenOrientation="unspecified" />
-        <activity
-            android:name=".Login.SplashActivity"
-            android:theme="@style/AppThemeDonate">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".HomeTreamentActivity"
             android:label="Home Treatment"

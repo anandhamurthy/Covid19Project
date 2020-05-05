@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -27,7 +28,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 
 public class MedicalStoresActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -87,6 +88,11 @@ public class MedicalStoresActivity extends FragmentActivity implements OnMapRead
                     Toast.makeText(this, "Showing Nearby Pharmacy", Toast.LENGTH_SHORT).show();
                     break;
 
+                case R.id.toolbar_icon:
+                    startActivity(new Intent(this, MainActivity.class));
+                    finish();
+                    break;
+
             }
 
     }
@@ -99,8 +105,8 @@ public class MedicalStoresActivity extends FragmentActivity implements OnMapRead
         googleURL.append("&radius=" + ProximityRadius);
         googleURL.append("&type=" + nearbyPlace);
         googleURL.append("&sensor=true");
-        googleURL.append("&key=" + "AIzaSyDbFCDy0lIB-rW9k0Wni2MXl4EP6QdwYiw");
-        Toast.makeText(this, googleURL.toString(), Toast.LENGTH_SHORT).show();
+        googleURL.append("&key=" + "AIzaSyC0sr6kACFb3I5zogTw6z96-pybTZGu_Vw");
+       // Toast.makeText(this, googleURL.toString(), Toast.LENGTH_SHORT).show();
         return googleURL.toString();
     }
 
@@ -154,6 +160,7 @@ public class MedicalStoresActivity extends FragmentActivity implements OnMapRead
                     {
                         if (googleApiClient == null)
                         {
+                            Toast.makeText(this, "kfjrneig", Toast.LENGTH_SHORT).show();
                             buildGoogleApiClient();
                         }
                         mMap.setMyLocationEnabled(true);
@@ -237,6 +244,5 @@ public class MedicalStoresActivity extends FragmentActivity implements OnMapRead
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
     }
 }

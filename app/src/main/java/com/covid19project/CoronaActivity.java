@@ -6,11 +6,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -33,8 +36,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.covid19project.Covid19Project.getInstance;
-
 public class CoronaActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
@@ -45,11 +46,14 @@ public class CoronaActivity extends AppCompatActivity {
     private RequestQueue mRequestQueue;
     private SearchView searchView;
 
+    private ImageView Back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_corona);
 
+        Back= findViewById(R.id.toolbar_icon);
         mRecyclerView = findViewById(R.id.corona_list);
         mRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
@@ -58,6 +62,14 @@ public class CoronaActivity extends AppCompatActivity {
 
         mAdapter = new CoronaAdapter(CoronaActivity.this, viewItems);
         mRecyclerView.setAdapter(mAdapter);
+
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CoronaActivity.this, MainActivity.class));
+                finish();
+            }
+        });
 
         mRequestQueue = Volley.newRequestQueue(this);
         parseJSON();

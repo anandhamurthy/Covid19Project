@@ -3,20 +3,52 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:gravity="center"
     android:layout_height="match_parent"
+    android:background="@drawable/donaterelief_bg"
     tools:context=".DonateMaterialsActivity">
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:id="@+id/toolbar"
+        android:background="@drawable/rounded">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/toolbar_icon"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/back"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
+            android:layout_toEndOf="@+id/toolbar_icon"
+            android:layout_centerVertical="true"
+            android:textSize="20dp"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/colorBlack"
+            android:text="Donate Relief Materials"
+            android:layout_toRightOf="@+id/toolbar_icon"
+            android:layout_marginLeft="10dp" />
+
+    </RelativeLayout>
 
 
     <TextView
         android:layout_width="wrap_content"
+        android:layout_below="@+id/toolbar"
         android:layout_height="wrap_content"
         android:text="1. Drugs / Medical Equipment \n To donate, please contact respective district ware house "
         android:fontFamily="@font/nunito_bold"
         android:textColor="@color/colorBlack"
         android:id="@+id/donate_drug_text"
-        android:textSize="20dp"
-        android:layout_centerHorizontal="true"
+        android:textSize="12dp"
         android:layout_margin="10dp"/>
 
     <Button
@@ -25,25 +57,25 @@
         android:id="@+id/donate_drug"
         android:text="Donate Drugs/Medical Equipment"
         android:fontFamily="@font/nunito_bold"
-        android:textSize="18dp"
+        android:textSize="15dp"
         android:layout_below="@+id/donate_drug_text"
         android:textColor="@color/colorWhite"
         android:background="@color/colorAccent"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:padding="10dp"
         android:layout_centerHorizontal="true"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2. .Relief /Hospital consumables \n To Donate Sanitary items( Gum boots, Protective gears for sanitary workers, Power sprayers, Masks (N95 or triple layer masks), Sanitisers, Disinfectants, Mosquito nets, Biomedical waste covers, Soaps, Covered bins, PPE Kits etc... \n\n
+        android:text="2. Relief /Hospital consumables \n To Donate Sanitary items( Gum boots, Protective gears for sanitary workers, Power sprayers, Masks (N95 or triple layer masks), Sanitisers, Disinfectants, Mosquito nets, Biomedical waste covers, Soaps, Covered bins, PPE Kits etc... \n\n
 And other relief materials contact the Nodal officer (Relief and CSR) of your respective district
 "
         android:fontFamily="@font/nunito_bold"
         android:textColor="@color/colorBlack"
         android:layout_below="@+id/donate_drug"
         android:id="@+id/donate_text"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"/>
 
@@ -53,9 +85,9 @@ And other relief materials contact the Nodal officer (Relief and CSR) of your re
         android:id="@+id/donate_relief"
         android:text="Donate Relief/Hospital Consumables"
         android:fontFamily="@font/nunito_bold"
-        android:textSize="18dp"
+        android:textSize="15dp"
         android:layout_below="@+id/donate_text"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:textColor="@color/colorWhite"
         android:background="@color/colorAccent"
         android:padding="10dp"

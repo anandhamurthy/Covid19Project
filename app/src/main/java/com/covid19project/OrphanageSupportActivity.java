@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 
 import com.android.volley.RequestQueue;
 import com.covid19project.Adapter.GridAdapter;
@@ -17,6 +18,7 @@ import com.covid19project.OrphanageSupport.FreeFoodActivity;
 import com.covid19project.OrphanageSupport.HomesActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
@@ -26,13 +28,6 @@ public class OrphanageSupportActivity extends AppCompatActivity {
 
 
     private GridView Grid_View;
-    private SliderView sliderView;
-    private FloatingActionButton Call;
-    ImageSliderAdapter imageSliderAdapter;
-    private List<Image_Slider> image_sliders = new ArrayList<>();
-    private RequestQueue mRequestQueue;
-
-    private FirebaseAuth mAuth;
 
     String[] web = {
             "Free Food",
@@ -46,14 +41,27 @@ public class OrphanageSupportActivity extends AppCompatActivity {
             R.drawable.delivery
 
     };
+
+    private ImageView Back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orphanage_support);
 
+        Back = findViewById(R.id.toolbar_icon);
+
         Grid_View=findViewById(R.id.grid_view);
         GridAdapter adapter = new GridAdapter(OrphanageSupportActivity.this, web, imageId);
         Grid_View.setAdapter(adapter);
+
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(OrphanageSupportActivity.this, MainActivity.class));
+                finish();
+            }
+        });
 
         Grid_View.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

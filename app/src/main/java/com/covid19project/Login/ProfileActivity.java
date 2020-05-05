@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +57,8 @@ public class ProfileActivity extends AppCompatActivity {
     private static final int REQUEST_LOCATION = 1;
     private GPSTracker gpsTracker;
 
+    private ImageView Back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +67,7 @@ public class ProfileActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Name = intent.getStringExtra("access");
 
+        Back = findViewById(R.id.toolbar_icon);
         Edit_Profile_Name = findViewById(R.id.edit_profile_name);
         Edit_Profile_Phone_Number = findViewById(R.id.edit_profile_phone_number);
         Edit_Profile_Address = findViewById(R.id.edit_profile_address);
@@ -89,6 +93,14 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getLocation();
+            }
+        });
+
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileActivity.this, MainActivity.class));
+                finish();
             }
         });
 

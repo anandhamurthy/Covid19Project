@@ -5,10 +5,9 @@
     android:layout_height="wrap_content"
     android:id="@+id/link"
     android:fontFamily="@font/nunito_bold"
-    android:autoLink="web"
     android:textColor="@color/colorAccent"
-    android:layout_marginStart="10dp"
+    android:layout_marginStart="25dp"
     android:textSize="18dp"
-    android:layout_marginLeft="10dp">
+    android:layout_marginLeft="25dp">
 
 </TextView>

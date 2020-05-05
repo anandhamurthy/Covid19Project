@@ -22,16 +22,16 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class MyHealthStatusActivity extends AppCompatActivity {
 
-    EditText name,age;
-    RadioGroup radiogrp_caugh, radiogrp_fever, radiogrp_breath, radiogrp_travel, radiogrp_nearaffected;
-    RadioButton rcough,rfever, rbreath, rtravel, rnaf;
-    FloatingActionButton button;
+    private RadioGroup radiogrp_caugh, radiogrp_fever, radiogrp_breath, radiogrp_travel, radiogrp_nearaffected;
+    private RadioButton rcough,rfever, rbreath, rtravel, rnaf;
+    private FloatingActionButton button;
+
+    private ImageView Back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_health_status);
-        name=findViewById(R.id.name);
-        age=findViewById(R.id.age);
 
         radiogrp_caugh=findViewById(R.id.radiogrp_caugh);
         radiogrp_fever=findViewById(R.id.radiogrp_fever);
@@ -40,7 +40,17 @@ public class MyHealthStatusActivity extends AppCompatActivity {
         radiogrp_nearaffected=findViewById(R.id.radiogrp_nearaffected);
         button=findViewById(R.id.fab_submit);
 
+        Back = findViewById(R.id.toolbar_icon);
+
         final ViewDialog alert = new ViewDialog();
+
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MyHealthStatusActivity.this, MainActivity.class));
+                finish();
+            }
+        });
 
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -60,8 +70,6 @@ public class MyHealthStatusActivity extends AppCompatActivity {
                     int naf = radiogrp_nearaffected.getCheckedRadioButtonId();
                     rnaf = findViewById(naf);
 
-                    String Name = name.getText().toString();
-                    String Age = age.getText().toString();
                     String Cough = rcough.getText().toString();
                     String Fever = rfever.getText().toString();
                     String Breath = rbreath.getText().toString();
@@ -69,7 +77,7 @@ public class MyHealthStatusActivity extends AppCompatActivity {
                     String NAF = rnaf.getText().toString();
 
 
-                    if (isEmpty(Name, Age, Cough, Fever, Breath, Travel, NAF)) {
+                    if (isEmpty(Cough, Fever, Breath, Travel, NAF)) {
                         int factor = 0;
                         boolean serious = false;
                         if (Cough.equals("Yes")) {
@@ -140,8 +148,8 @@ public class MyHealthStatusActivity extends AppCompatActivity {
         }
     }
 
-    private boolean isEmpty(String name, String age, String cough, String fever, String breath, String travel, String naf) {
-        if (name.isEmpty() || age.isEmpty() || cough.isEmpty() || fever.isEmpty() || breath.isEmpty()
+    private boolean isEmpty(String cough, String fever, String breath, String travel, String naf) {
+        if (cough.isEmpty() || fever.isEmpty() || breath.isEmpty()
                 || travel.isEmpty() || naf.isEmpty()) {
             Toast.makeText(MyHealthStatusActivity.this, "Complete All Details", Toast.LENGTH_SHORT).show();
             return false;

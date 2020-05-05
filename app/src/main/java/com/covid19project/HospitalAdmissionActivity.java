@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -51,6 +52,8 @@ public class HospitalAdmissionActivity extends AppCompatActivity implements Pers
 
     private SearchView searchView;
 
+    private ImageView Back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +65,7 @@ public class HospitalAdmissionActivity extends AppCompatActivity implements Pers
         mCurrentUser = mAuth.getCurrentUser();
         mNoPersons = findViewById(R.id.no_persons);
         mPersonList = findViewById(R.id.volunteer_list);
+        Back = findViewById(R.id.toolbar_icon);
 
         mPersonsDatabase = FirebaseDatabase.getInstance().getReference().child("Persons");
         mPersonsDatabase.keepSynced(true);
@@ -74,6 +78,14 @@ public class HospitalAdmissionActivity extends AppCompatActivity implements Pers
         mPersonList.setAdapter(personAdapter);
 
         readPersons("Hospital Admission");
+
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HospitalAdmissionActivity.this, MainActivity.class));
+                finish();
+            }
+        });
 
         Add.setOnClickListener(new View.OnClickListener() {
             @Override

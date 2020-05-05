@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 
 import com.covid19project.Adapter.GridAdapter;
 import com.covid19project.Login.LoginActivity;
@@ -21,6 +23,9 @@ import com.covid19project.Login.ProfileActivity;
 import com.covid19project.Models.Jsons;
 import com.covid19project.Models.Users;
 import com.covid19project.OrphanageSupport.FreeFoodActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,6 +34,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     private GridView Grid_View;
 
     private FirebaseAuth mAuth;
+
+    private ImageView Profile, Menu;
 
     String[] web = {
             "Corona Status",
@@ -58,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
             "Donate Relief Material",
             "Application Tracker",
             "Counselling",
+            "Non Resident People",
             "Tweets",
             "Videos",
             "FAQs"
@@ -82,8 +93,9 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.donate_relief,
             R.drawable.tracker,
             R.drawable.counselling,
+            R.drawable.nonresident,
             R.drawable.tweet,
-            R.drawable.videos,
+            R.drawable.video,
             R.drawable.faq
 
     };
@@ -97,6 +109,38 @@ public class MainActivity extends AppCompatActivity {
 
 
         Grid_View=findViewById(R.id.grid_view);
+        Profile = findViewById(R.id.toolbar_profile);
+        Menu = findViewById(R.id.toolbar_menu);
+        Profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                intent.putExtra("access","true");
+                startActivity(intent);
+            }
+        });
+
+        Menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(MainActivity.this, v);
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.logout:
+                                FirebaseAuth.getInstance().signOut();
+                                sendToLogin();
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                });
+                popupMenu.inflate(R.menu.menu_main);
+                popupMenu.show();
+            }
+        });
 
         GridAdapter adapter = new GridAdapter(MainActivity.this, web, imageId);
 
@@ -215,19 +259,24 @@ public class MainActivity extends AppCompatActivity {
                                     startActivity(intent17);
                                     break;
                                 case 18:
-                                    Intent intent18 = new Intent(MainActivity.this, TweetsActivity.class);
-                                    intent18.putExtra("url", jsons.getTweets());
+                                    Intent intent18 = new Intent(Intent.ACTION_VIEW);
+                                    intent18.setData(Uri.parse(jsons.getMigrant()));
                                     startActivity(intent18);
                                     break;
                                 case 19:
-                                    Intent intent19 = new Intent(Intent.ACTION_VIEW);
-                                    intent19.setData(Uri.parse(jsons.getVideos()));
+                                    Intent intent19 = new Intent(MainActivity.this, TweetsActivity.class);
+                                    intent19.putExtra("url", jsons.getTweets());
                                     startActivity(intent19);
                                     break;
                                 case 20:
-                                    Intent intent16 = new Intent(Intent.ACTION_VIEW);
-                                    intent16.setData(Uri.parse(jsons.getFaq()));
-                                    startActivity(intent16);
+                                    Intent intent20 = new Intent(Intent.ACTION_VIEW);
+                                    intent20.setData(Uri.parse(jsons.getVideos()));
+                                    startActivity(intent20);
+                                    break;
+                                case 21:
+                                    Intent intent21 = new Intent(MainActivity.this, FAQsActivity.class);
+                                    intent21.putExtra("url", jsons.getFaq());
+                                    startActivity(intent21);
                                     break;
 
                             }
@@ -283,31 +332,31 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id){
-            case R.id.profile:
-                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
-                intent.putExtra("access","true");
-                startActivity(intent);
-                return true;
-            case R.id.logout:
-                FirebaseAuth.getInstance().signOut();
-                sendToLogin();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//        switch (id){
+//            case R.id.profile:
+//                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+//                intent.putExtra("access","true");
+//                startActivity(intent);
+//                return true;
+//            case R.id.logout:
+//                FirebaseAuth.getInstance().signOut();
+//                sendToLogin();
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//
+//    }
 
     private void sendToLogin() {
         Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);

@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -56,12 +57,14 @@ public class ConfirmActivity extends AppCompatActivity {
 
     private static final int REQUEST_LOCATION = 1;
     private GPSTracker gpsTracker;
+    private ImageView Back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm);
 
+        Back = findViewById(R.id.toolbar_icon);
         Confirm_Name = findViewById(R.id.confirm_name);
         Confirm_Phone_Number = findViewById(R.id.confirm_phone_number);
         Confirm_Address = findViewById(R.id.confirm_address);
@@ -72,6 +75,14 @@ public class ConfirmActivity extends AppCompatActivity {
         Confirm_Done = findViewById(R.id.confirm_done);
         Confirm_Get_Location = findViewById(R.id.confirm_get_location);
         category=findViewById(R.id.categorys);
+
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ConfirmActivity.this, MainActivity.class));
+                finish();
+            }
+        });
 
         category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

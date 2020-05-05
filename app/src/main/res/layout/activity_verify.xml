@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@drawable/verify_bg"
     android:layout_height="match_parent"
     tools:context=".Login.VerifyActivity">
 
@@ -39,6 +39,7 @@
         android:layout_below="@id/verify_text"
         android:fontFamily="@font/nunito"
         android:inputType="number"
+        android:background="@drawable/button_bg"
         android:layout_centerHorizontal="true"
         android:digits="0123456789"
         android:hint="Enter Code"
@@ -51,7 +52,7 @@
         android:layout_below="@id/verify_code"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorAccent"
         android:text="Done"
         android:fontFamily="@font/nunito"
         android:textAllCaps="false"

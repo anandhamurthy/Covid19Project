@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -42,6 +43,7 @@ public class TestLabsActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private RequestQueue mRequestQueue;
 
+    private ImageView Back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +58,20 @@ public class TestLabsActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
+        Back = findViewById(R.id.toolbar_icon);
 
         final ProgressDialog Dialog = new ProgressDialog(TestLabsActivity.this);
         Dialog.setMessage("Loading...");
         Dialog.setCanceledOnTouchOutside(false);
         Dialog.show();
 
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(TestLabsActivity.this, MainActivity.class));
+                finish();
+            }
+        });
         mRequestQueue = Volley.newRequestQueue(this);
         parseJSON(url);
 

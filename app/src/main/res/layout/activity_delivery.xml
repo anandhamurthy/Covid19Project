@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/app_bg"
     android:layout_height="match_parent"
     tools:context=".OrphanageSupport.DeliveryActivity">
 
@@ -22,8 +23,9 @@
             android:layout_height="match_parent"
             android:fontFamily="@font/nunito"
             android:gravity="center"
+            android:layout_margin="20dp"
             android:text="No Volunteers for Delivery Yet. Click + to become Delivery person"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorWhite"
             android:textSize="20dp" />
 
     </RelativeLayout>

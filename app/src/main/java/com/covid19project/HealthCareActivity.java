@@ -8,11 +8,13 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -28,6 +30,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class HealthCareActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -75,6 +80,9 @@ public class HealthCareActivity extends FragmentActivity implements OnMapReadyCa
                 Toast.makeText(this, "Searching for Nearby Health Care", Toast.LENGTH_SHORT).show();
                 Toast.makeText(this, "Showing Nearby Health Care", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.toolbar_icon:
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
 
         }
 
@@ -83,12 +91,12 @@ public class HealthCareActivity extends FragmentActivity implements OnMapReadyCa
 
     private String getUrl(double latitide, double longitude, String nearbyPlace)
     {
-        StringBuilder googleURL = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+        StringBuilder googleURL = new StringBuilder("https://maps.googleapis.com/maps/api/place/textsearch/json?");
         googleURL.append("location=" + latitide + "," + longitude);
         googleURL.append("&radius=" + ProximityRadius);
         googleURL.append("&type=" + nearbyPlace);
         googleURL.append("&sensor=true");
-        googleURL.append("&key=" + "AIzaSyDbFCDy0lIB-rW9k0Wni2MXl4EP6QdwYiw");
+        googleURL.append("&key=" + "AIzaSyC0sr6kACFb3I5zogTw6z96-pybTZGu_Vw");
         Toast.makeText(this, googleURL.toString(), Toast.LENGTH_SHORT).show();
         return googleURL.toString();
     }
@@ -168,6 +176,7 @@ public class HealthCareActivity extends FragmentActivity implements OnMapReadyCa
                 .build();
 
         googleApiClient.connect();
+
     }
 
 
@@ -228,4 +237,5 @@ public class HealthCareActivity extends FragmentActivity implements OnMapReadyCa
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+
 }
