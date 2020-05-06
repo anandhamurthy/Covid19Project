@@ -80,10 +80,6 @@ public class HealthCareActivity extends FragmentActivity implements OnMapReadyCa
                 Toast.makeText(this, "Searching for Nearby Health Care", Toast.LENGTH_SHORT).show();
                 Toast.makeText(this, "Showing Nearby Health Care", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.toolbar_icon:
-                startActivity(new Intent(this, MainActivity.class));
-                finish();
-
         }
 
     }

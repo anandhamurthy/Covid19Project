@@ -3,6 +3,7 @@ package com.covid19project;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.donate_relief,
             R.drawable.tracker,
             R.drawable.counselling,
-            R.drawable.nonresident,
+            R.drawable.people,
             R.drawable.tweet,
             R.drawable.video,
             R.drawable.faq
@@ -143,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         GridAdapter adapter = new GridAdapter(MainActivity.this, web, imageId);
+        Grid_View.setAdapter(adapter);
 
         final ProgressDialog Dialog = new ProgressDialog(MainActivity.this);
         Dialog.setMessage("Loading...");
@@ -151,8 +153,9 @@ public class MainActivity extends AppCompatActivity {
 
         mJsonDatabase = FirebaseDatabase.getInstance().getReference().child("Jsons");
         mJsonDatabase.keepSynced(true);
+        Dialog.hide();
 
-        Grid_View.setAdapter(adapter);
+
 
         if (mAuth.getCurrentUser() != null) {
 

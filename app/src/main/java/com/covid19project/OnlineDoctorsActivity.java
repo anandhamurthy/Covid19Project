@@ -80,7 +80,6 @@ public class OnlineDoctorsActivity extends AppCompatActivity implements PersonAd
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(OnlineDoctorsActivity.this, MainActivity.class));
                 finish();
             }
         });

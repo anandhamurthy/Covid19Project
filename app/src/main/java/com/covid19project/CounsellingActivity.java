@@ -28,7 +28,6 @@ public class CounsellingActivity extends AppCompatActivity {
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CounsellingActivity.this, MainActivity.class));
                 finish();
             }
         });

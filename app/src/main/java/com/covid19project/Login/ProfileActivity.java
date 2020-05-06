@@ -99,7 +99,6 @@ public class ProfileActivity extends AppCompatActivity {
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ProfileActivity.this, MainActivity.class));
                 finish();
             }
         });

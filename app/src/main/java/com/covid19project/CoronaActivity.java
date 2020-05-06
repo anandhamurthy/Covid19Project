@@ -69,7 +69,6 @@ public class CoronaActivity extends AppCompatActivity {
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CoronaActivity.this, MainActivity.class));
                 finish();
             }
         });

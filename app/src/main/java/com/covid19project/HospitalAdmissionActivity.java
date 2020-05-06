@@ -82,7 +82,6 @@ public class HospitalAdmissionActivity extends AppCompatActivity implements Pers
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HospitalAdmissionActivity.this, MainActivity.class));
                 finish();
             }
         });

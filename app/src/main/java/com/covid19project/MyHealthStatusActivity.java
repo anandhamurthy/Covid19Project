@@ -47,7 +47,6 @@ public class MyHealthStatusActivity extends AppCompatActivity {
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MyHealthStatusActivity.this, MainActivity.class));
                 finish();
             }
         });

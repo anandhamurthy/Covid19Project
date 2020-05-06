@@ -75,6 +75,7 @@
         </activity>
         <activity
             android:name=".VolunteersActivity"
+            android:theme="@style/AppThemeOrphanage"
             android:label="Volunteers and Donors">
             <meta-data
                 android:name="android.app.searchable"

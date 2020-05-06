@@ -29,7 +29,6 @@ public class DonateMaterialsActivity extends AppCompatActivity {
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DonateMaterialsActivity.this, MainActivity.class));
                 finish();
             }
         });

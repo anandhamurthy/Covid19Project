@@ -88,11 +88,6 @@ public class MedicalStoresActivity extends FragmentActivity implements OnMapRead
                     Toast.makeText(this, "Showing Nearby Pharmacy", Toast.LENGTH_SHORT).show();
                     break;
 
-                case R.id.toolbar_icon:
-                    startActivity(new Intent(this, MainActivity.class));
-                    finish();
-                    break;
-
             }
 
     }

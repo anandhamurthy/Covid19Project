@@ -26,7 +26,6 @@ public class DonateFundsActivity extends AppCompatActivity {
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DonateFundsActivity.this, MainActivity.class));
                 finish();
             }
         });
