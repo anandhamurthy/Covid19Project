@@ -40,18 +40,14 @@ import java.util.List;
 
 public class DeliveryActivity extends AppCompatActivity implements PersonAdapter.SearchAdapterListener {
 
-    private DatabaseReference mUsersDatabase;
     private FloatingActionButton Add;
     private RecyclerView mPersonList;
+
     private PersonAdapter personAdapter;
     private List<Persons> personsList;
-    private FirebaseAuth mAuth;
-    private FirebaseUser mFirebaseUser;
     private RelativeLayout mNoPersons;
-    private String mCurrentUserId;
 
     private DatabaseReference mPersonsDatabase;
-    private FirebaseUser mCurrentUser;
 
     private SearchView searchView;
 
@@ -60,10 +56,7 @@ public class DeliveryActivity extends AppCompatActivity implements PersonAdapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delivery);
 
-        mAuth = FirebaseAuth.getInstance();
         Add = findViewById(R.id.add);
-        mAuth = FirebaseAuth.getInstance();
-        mCurrentUser = mAuth.getCurrentUser();
         mNoPersons = findViewById(R.id.no_persons);
         mPersonList =findViewById(R.id.volunteer_list);
 
@@ -76,9 +69,6 @@ public class DeliveryActivity extends AppCompatActivity implements PersonAdapter
         personsList = new ArrayList<>();
         personAdapter = new PersonAdapter(this, personsList, this);
         mPersonList.setAdapter(personAdapter);
-
-
-        readPersons();
 
         Add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +98,8 @@ public class DeliveryActivity extends AppCompatActivity implements PersonAdapter
                 }
             }
         });
+
+        readPersons();
 
     }
 
@@ -161,15 +153,12 @@ public class DeliveryActivity extends AppCompatActivity implements PersonAdapter
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_search, menu);
 
-        // Associate searchable configuration with the SearchView
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView = (SearchView) menu.findItem(R.id.action_search)
                 .getActionView();
         searchView.setSearchableInfo(searchManager
                 .getSearchableInfo(getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);
-
-        // listening to search query text change
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -190,12 +179,7 @@ public class DeliveryActivity extends AppCompatActivity implements PersonAdapter
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
             return true;
         }

@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.covid19project.ImageDetailedActivity;
 import com.covid19project.Models.Image_Slider;
 import com.covid19project.R;
@@ -39,7 +40,8 @@ public class ImageSliderAdapter extends
         final Image_Slider sliderItem = mImage_Slider.get(position);
         Glide.with(context)
                 .load(sliderItem.getImage())
-                .fitCenter()
+                .placeholder(R.drawable.placeholder)
+                .diskCacheStrategy(DiskCacheStrategy.DATA)
                 .into(viewHolder.image);
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {

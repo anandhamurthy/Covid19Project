@@ -39,6 +39,7 @@
         android:layout_below="@id/verify_text"
         android:fontFamily="@font/nunito"
         android:inputType="number"
+        android:padding="10dp"
         android:background="@drawable/button_bg"
         android:layout_centerHorizontal="true"
         android:digits="0123456789"

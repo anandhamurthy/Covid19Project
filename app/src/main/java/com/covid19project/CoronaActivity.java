@@ -42,9 +42,7 @@ public class CoronaActivity extends AppCompatActivity {
     private List<Corona> viewItems;
 
     private CoronaAdapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
     private RequestQueue mRequestQueue;
-    private SearchView searchView;
 
     private ImageView Back;
 
@@ -59,8 +57,8 @@ public class CoronaActivity extends AppCompatActivity {
         Back= findViewById(R.id.toolbar_icon);
         mRecyclerView = findViewById(R.id.corona_list);
         mRecyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(layoutManager);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
         viewItems = new ArrayList<>();
 
         mAdapter = new CoronaAdapter(CoronaActivity.this, viewItems);
@@ -78,8 +76,6 @@ public class CoronaActivity extends AppCompatActivity {
     }
 
     private void parseJSON(String url1) {
-        String url = "https://firebasestorage.googleapis.com/v0/b/covid19-project-c24e6.appspot.com/o/tn.json?alt=media&token=1c558046-f612-4b87-a8f9-92a0effc85b6";
-
         JsonObjectRequest request = new JsonObjectRequest(url1, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -93,8 +89,9 @@ public class CoronaActivity extends AppCompatActivity {
                                 String confirmed = hit.getString("confirmed");
 
                                 viewItems.add(new Corona(district, confirmed));
-                                mAdapter.notifyDataSetChanged();
                             }
+                            mAdapter = new CoronaAdapter(CoronaActivity.this, viewItems);
+                            mRecyclerView.setAdapter(mAdapter);
                             mAdapter.notifyDataSetChanged();
 
 
@@ -110,7 +107,6 @@ public class CoronaActivity extends AppCompatActivity {
         });
 
         mRequestQueue.add(request);
-        mAdapter.notifyDataSetChanged();
     }
 
 }

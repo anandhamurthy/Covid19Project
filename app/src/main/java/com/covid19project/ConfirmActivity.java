@@ -141,8 +141,6 @@ public class ConfirmActivity extends AppCompatActivity {
                         Description.getText().toString(),Confirm_Email_Id.getText().toString())) {
                     if (!category_name.equals("Select")) {
 
-                        String key =mPersonsDatabase.push().getKey();
-
                         HashMap<String, Object> map = new HashMap<>();
                         map.put("name", Confirm_Name.getText().toString());
                         map.put("address", Confirm_Address.getText().toString());

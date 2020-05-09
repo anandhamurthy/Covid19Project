@@ -26,7 +26,6 @@ public class ImageDetailedActivity extends AppCompatActivity {
         Back= findViewById(R.id.toolbar_icon);
         Glide.with(ImageDetailedActivity.this)
                 .load(image)
-                .fitCenter()
                 .into(Image_Detailed);
         Image_Detailed.setOnTouchListener(new ImageMatrixTouchHandler(ImageDetailedActivity.this));
 

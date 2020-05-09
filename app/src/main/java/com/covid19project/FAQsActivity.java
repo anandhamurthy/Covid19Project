@@ -30,10 +30,9 @@ import java.util.List;
 public class FAQsActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private List<FAQ> viewItems = new ArrayList<>();
+    private List<FAQ> viewItems;
 
     private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
     private RequestQueue mRequestQueue;
 
     private ImageView Back;
@@ -49,8 +48,12 @@ public class FAQsActivity extends AppCompatActivity {
         Back = findViewById(R.id.toolbar_icon);
         mRecyclerView = findViewById(R.id.faq_list);
         mRecyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(layoutManager);
+        viewItems = new ArrayList<>();
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        mAdapter = new FAQAdapter(FAQsActivity.this, viewItems);
+        mRecyclerView.setAdapter(mAdapter);
 
         mRequestQueue = Volley.newRequestQueue(this);
 
@@ -64,8 +67,6 @@ public class FAQsActivity extends AppCompatActivity {
     }
 
     private void parseJSON(String url1) {
-        String url = "https://firebasestorage.googleapis.com/v0/b/covid19-project-c24e6.appspot.com/o/test_lab.json?alt=media&token=6b44be91-9e8d-4c99-b9e7-008f798b592a";
-
         JsonObjectRequest request = new JsonObjectRequest(url1, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -83,6 +84,7 @@ public class FAQsActivity extends AppCompatActivity {
 
                             mAdapter = new FAQAdapter(FAQsActivity.this, viewItems);
                             mRecyclerView.setAdapter(mAdapter);
+                            mAdapter.notifyDataSetChanged();
 
                         } catch (JSONException e) {
                             e.printStackTrace();

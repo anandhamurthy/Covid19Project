@@ -100,10 +100,10 @@ public class MyHealthStatusActivity extends AppCompatActivity {
                                     "The risk of being affected is less. Stay safe in your home!", R.drawable.healthy);
                         } else if (serious == true) {
                             alert.showDialog(MyHealthStatusActivity.this,
-                                    "You have a high risk of getting affected. Go to a nearby corona testing center immediately.", R.drawable.alert);
+                                    "You have a high risk of getting affected. Go to a nearby corona testing center immediately.", R.drawable.danger);
                         } else {
                             alert.showDialog(MyHealthStatusActivity.this,
-                                    "You have symptoms of Corona virus. Stay quarentined in home and we recommend you to visit a nearby corona testing center.", R.drawable.danger);
+                                    "You have symptoms of Corona virus. Stay quarentined in home and we recommend you to visit a nearby corona testing center.", R.drawable.alert);
                         }
 
                     } else {

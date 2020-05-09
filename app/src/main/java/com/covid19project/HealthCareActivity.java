@@ -70,7 +70,6 @@ public class HealthCareActivity extends FragmentActivity implements OnMapReadyCa
 
         switch (v.getId()) {
             case R.id.healthcare:
-                //mMap.clear();
                 String medical_store_url = getUrl(latitide, longitude, "hospital");
                 transferData[0] = mMap;
                 transferData[1] = medical_store_url;

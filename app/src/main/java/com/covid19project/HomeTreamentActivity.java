@@ -39,11 +39,9 @@ public class HomeTreamentActivity extends AppCompatActivity {
     ImageSliderAdapter imageSliderAdapter;
     LinkAdapter linkAdapter;
     private RecyclerView Link_List;
-    private List<Image_Slider> image_sliders = new ArrayList<>();
-    private List<Link> links = new ArrayList<>();
+    private List<Image_Slider> image_sliders;
+    private List<Link> links;
     private RequestQueue mRequestQueue;
-
-    private RecyclerView.LayoutManager layoutManagerLink;
 
     private FloatingActionButton Call;
     private ImageView Back;
@@ -62,21 +60,25 @@ public class HomeTreamentActivity extends AppCompatActivity {
         sliderView = findViewById(R.id.image_slider);
         Link_List = findViewById(R.id.link_list);
         Link_List.setHasFixedSize(true);
-        layoutManagerLink = new LinearLayoutManager(this);
-        Link_List.setLayoutManager(layoutManagerLink);
+
+        image_sliders = new ArrayList<>();
+        links = new ArrayList<>();
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+        Link_List.setLayoutManager(mLayoutManager);
+
+        imageSliderAdapter = new ImageSliderAdapter(HomeTreamentActivity.this, image_sliders);
+        sliderView.setSliderAdapter(imageSliderAdapter);
+
+        linkAdapter = new LinkAdapter(HomeTreamentActivity.this, links);
+        Link_List.setAdapter(linkAdapter);
 
         sliderView.setIndicatorAnimation(IndicatorAnimations.WORM);
         sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
         sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
         sliderView.setIndicatorSelectedColor(Color.WHITE);
-        sliderView.setIndicatorUnselectedColor(Color.GRAY);
+        sliderView.setIndicatorUnselectedColor(Color.BLUE);
         sliderView.setScrollTimeInSec(4);
         sliderView.startAutoCycle();
-
-        final ProgressDialog Dialog = new ProgressDialog(HomeTreamentActivity.this);
-        Dialog.setMessage("Loading...");
-        Dialog.setCanceledOnTouchOutside(false);
-        Dialog.show();
 
         Call.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,13 +99,9 @@ public class HomeTreamentActivity extends AppCompatActivity {
         mRequestQueue = Volley.newRequestQueue(this);
         parseJSONImages(image_url);
         parseJSONLinks(link_url);
-
-        Dialog.hide();
     }
 
     private void parseJSONImages(String image_url) {
-        String url = "https://firebasestorage.googleapis.com/v0/b/covid19-project-c24e6.appspot.com/o/images.json?alt=media&token=d8124108-9b4f-43fb-ba7e-44f0008838ed";
-
         JsonObjectRequest request = new JsonObjectRequest(image_url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -120,6 +118,7 @@ public class HomeTreamentActivity extends AppCompatActivity {
 
                             imageSliderAdapter = new ImageSliderAdapter(HomeTreamentActivity.this, image_sliders);
                             sliderView.setSliderAdapter(imageSliderAdapter);
+                            imageSliderAdapter.notifyDataSetChanged();
 
 
                         } catch (JSONException e) {
@@ -137,8 +136,6 @@ public class HomeTreamentActivity extends AppCompatActivity {
     }
 
     private void parseJSONLinks(String link_url) {
-        String url = "https://firebasestorage.googleapis.com/v0/b/covid19-project-c24e6.appspot.com/o/links.json?alt=media&token=96128da8-4ed4-409a-9c32-1ac0071a24dd";
-
         JsonObjectRequest request = new JsonObjectRequest(link_url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -157,6 +154,7 @@ public class HomeTreamentActivity extends AppCompatActivity {
 
                             linkAdapter = new LinkAdapter(HomeTreamentActivity.this, links);
                             Link_List.setAdapter(linkAdapter);
+                            linkAdapter.notifyDataSetChanged();
 
                         } catch (JSONException e) {
                             e.printStackTrace();

@@ -35,10 +35,9 @@ import java.util.List;
 public class DonateDrugActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private List<DonateDrug> viewItems = new ArrayList<>();
+    private List<DonateDrug> viewItems;
 
     private DonateDrugAdapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
     private RequestQueue mRequestQueue;
 
     private ImageView Back;
@@ -47,21 +46,18 @@ public class DonateDrugActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donate_drug);
+
         Intent intent = getIntent();
         final String drug_url = intent.getStringExtra("url");
 
         Back = findViewById(R.id.toolbar_icon);
         mRecyclerView = findViewById(R.id.donate_drug_list);
+
         mRecyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(layoutManager);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         viewItems = new ArrayList<>();
-
-        final ProgressDialog Dialog = new ProgressDialog(DonateDrugActivity.this);
-        Dialog.setMessage("Loading...");
-        Dialog.setCanceledOnTouchOutside(false);
-        Dialog.show();
 
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,12 +70,9 @@ public class DonateDrugActivity extends AppCompatActivity {
 
         mAdapter = new DonateDrugAdapter(DonateDrugActivity.this, viewItems);
         mRecyclerView.setAdapter(mAdapter);
-
-        Dialog.hide();
     }
 
     private void parseJSON(String drug_url) {
-        String url = "https://firebasestorage.googleapis.com/v0/b/covid19-project-c24e6.appspot.com/o/test_lab.json?alt=media&token=dafd6942-2cb1-497a-8fd0-3dfc6525db6e";
 
         JsonObjectRequest request = new JsonObjectRequest(drug_url, null,
                 new Response.Listener<JSONObject>() {

@@ -66,7 +66,6 @@ public class MedicalStoresActivity extends FragmentActivity implements OnMapRead
 
             switch (v.getId()) {
                 case R.id.medical_store:
-                    //mMap.clear();
                     String medical_store_url = getUrl(latitide, longitude, "drugstore");
                     transferData[0] = mMap;
                     transferData[1] = medical_store_url;
@@ -78,7 +77,6 @@ public class MedicalStoresActivity extends FragmentActivity implements OnMapRead
                     break;
 
                 case R.id.pharmacy:
-                    //mMap.clear();
                     String pharmacy_url = getUrl(latitide, longitude, "pharmacy");
                     transferData[0] = mMap;
                     transferData[1] = pharmacy_url;
@@ -101,7 +99,6 @@ public class MedicalStoresActivity extends FragmentActivity implements OnMapRead
         googleURL.append("&type=" + nearbyPlace);
         googleURL.append("&sensor=true");
         googleURL.append("&key=" + "AIzaSyC0sr6kACFb3I5zogTw6z96-pybTZGu_Vw");
-       // Toast.makeText(this, googleURL.toString(), Toast.LENGTH_SHORT).show();
         return googleURL.toString();
     }
 
@@ -155,7 +152,6 @@ public class MedicalStoresActivity extends FragmentActivity implements OnMapRead
                     {
                         if (googleApiClient == null)
                         {
-                            Toast.makeText(this, "kfjrneig", Toast.LENGTH_SHORT).show();
                             buildGoogleApiClient();
                         }
                         mMap.setMyLocationEnabled(true);

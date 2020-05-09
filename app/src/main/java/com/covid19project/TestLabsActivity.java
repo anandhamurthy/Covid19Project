@@ -37,10 +37,9 @@ import java.util.List;
 public class TestLabsActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private List<Test_Labs> viewItems = new ArrayList<>();
+    private List<Test_Labs> viewItems;
 
     private TestLabsAdapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
     private RequestQueue mRequestQueue;
 
     private ImageView Back;
@@ -55,15 +54,11 @@ public class TestLabsActivity extends AppCompatActivity {
 
         mRecyclerView = findViewById(R.id.test_lab_list);
         mRecyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(layoutManager);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        viewItems = new ArrayList<>();
         mRecyclerView.setAdapter(mAdapter);
         Back = findViewById(R.id.toolbar_icon);
-
-        final ProgressDialog Dialog = new ProgressDialog(TestLabsActivity.this);
-        Dialog.setMessage("Loading...");
-        Dialog.setCanceledOnTouchOutside(false);
-        Dialog.show();
 
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,16 +71,9 @@ public class TestLabsActivity extends AppCompatActivity {
 
         mAdapter = new TestLabsAdapter(TestLabsActivity.this, viewItems);
         mRecyclerView.setAdapter(mAdapter);
-
-        Dialog.hide();
-
     }
 
     private void parseJSON(String url1) {
-
-
-        String url = "https://firebasestorage.googleapis.com/v0/b/covid19-project-c24e6.appspot.com/o/test_lab.json?alt=media&token=dafd6942-2cb1-497a-8fd0-3dfc6525db6e";
-
         JsonObjectRequest request = new JsonObjectRequest(url1, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -104,6 +92,7 @@ public class TestLabsActivity extends AppCompatActivity {
 
                             mAdapter = new TestLabsAdapter(TestLabsActivity.this, viewItems);
                             mRecyclerView.setAdapter(mAdapter);
+                            mAdapter.notifyDataSetChanged();
 
                         } catch (JSONException e) {
                             e.printStackTrace();

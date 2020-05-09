@@ -38,7 +38,6 @@ public class TollNumbersActivity extends AppCompatActivity{
     private List<Toll_Numbers> viewItems;
 
     private TollNumbersAdapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
     private RequestQueue mRequestQueue;
 
     private ImageView Back;
@@ -54,8 +53,8 @@ public class TollNumbersActivity extends AppCompatActivity{
         Back = findViewById(R.id.toolbar_icon);
         mRecyclerView = findViewById(R.id.toll_numbers_list);
         mRecyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(layoutManager);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
         viewItems = new ArrayList<>();
 
         Back.setOnClickListener(new View.OnClickListener() {
@@ -65,22 +64,14 @@ public class TollNumbersActivity extends AppCompatActivity{
             }
         });
 
-        final ProgressDialog Dialog = new ProgressDialog(TollNumbersActivity.this);
-        Dialog.setMessage("Loading...");
-        Dialog.setCanceledOnTouchOutside(false);
-        Dialog.show();
-
         mRequestQueue = Volley.newRequestQueue(this);
         parseJSON(url);
 
         mAdapter = new TollNumbersAdapter(TollNumbersActivity.this, viewItems);
         mRecyclerView.setAdapter(mAdapter);
-
-        Dialog.hide();
     }
 
     private void parseJSON(String url1) {
-        String url = "https://firebasestorage.googleapis.com/v0/b/covid19-project-c24e6.appspot.com/o/toll_numbers.json?alt=media&token=bf047ee9-705f-493a-9f98-06878697e75e";
         JsonObjectRequest request = new JsonObjectRequest(url1, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -99,6 +90,7 @@ public class TollNumbersActivity extends AppCompatActivity{
 
                             mAdapter = new TollNumbersAdapter(TollNumbersActivity.this, viewItems);
                             mRecyclerView.setAdapter(mAdapter);
+                            mAdapter.notifyDataSetChanged();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
