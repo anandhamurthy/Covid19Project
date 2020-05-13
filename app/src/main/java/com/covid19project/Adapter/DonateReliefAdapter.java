@@ -42,7 +42,7 @@ public class DonateReliefAdapter extends RecyclerView.Adapter<DonateReliefAdapte
         final DonateRelief donateRelief = mDonate_Relief.get(position);
 
         holder.District.setText(donateRelief.getDistrict());
-        holder.Mobile.setText(donateRelief.getMobile());
+        holder.Mobile.setText("+91"+donateRelief.getMobile());
     }
 
     @Override

@@ -43,7 +43,7 @@ public class HomeTreamentActivity extends AppCompatActivity {
     private List<Link> links;
     private RequestQueue mRequestQueue;
 
-    private FloatingActionButton Call;
+    private FloatingActionButton Call, Alarm;
     private ImageView Back;
 
     @Override
@@ -60,6 +60,7 @@ public class HomeTreamentActivity extends AppCompatActivity {
         sliderView = findViewById(R.id.image_slider);
         Link_List = findViewById(R.id.link_list);
         Link_List.setHasFixedSize(true);
+        Alarm=findViewById(R.id.alarm);
 
         image_sliders = new ArrayList<>();
         links = new ArrayList<>();
@@ -85,6 +86,14 @@ public class HomeTreamentActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
                 intent.setData(Uri.parse("tel:044-29510500"));
+                startActivity(intent);
+            }
+        });
+
+        Alarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeTreamentActivity.this, AlarmActivity.class);
                 startActivity(intent);
             }
         });

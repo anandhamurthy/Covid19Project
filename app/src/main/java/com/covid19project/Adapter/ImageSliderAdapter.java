@@ -47,9 +47,13 @@ public class ImageSliderAdapter extends
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,ImageDetailedActivity.class);
-                intent.putExtra("image",sliderItem.getImage());
-                context.startActivity(intent);
+                if (!sliderItem.getImage().isEmpty()) {
+                    Intent intent = new Intent(context, ImageDetailedActivity.class);
+                    intent.putExtra("image", sliderItem.getImage());
+                    context.startActivity(intent);
+                }else{
+                    Toast.makeText(context, "Loading..", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

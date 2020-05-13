@@ -29,7 +29,7 @@
             android:text="Mobile"
             android:textSize="15dp"
             android:fontFamily="@font/nunito"
-            android:autoLink="phone"
+            android:autoLink="all"
             android:id="@+id/mobile"
             android:drawableStart="@drawable/phone"
             android:drawablePadding="5dp"

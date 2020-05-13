@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.covid19project.ContainmentZonesActivity;
 import com.covid19project.CoronaActivity;
 import com.covid19project.CounsellingActivity;
 import com.covid19project.DonateFundsActivity;
@@ -21,12 +22,11 @@ import com.covid19project.FAQsActivity;
 import com.covid19project.HealthCareActivity;
 import com.covid19project.HomeTreamentActivity;
 import com.covid19project.HospitalAdmissionActivity;
-import com.covid19project.MainActivity;
 import com.covid19project.MedicalStoresActivity;
-import com.covid19project.Models.Corona;
 import com.covid19project.Models.Jsons;
 import com.covid19project.MyHealthStatusActivity;
 import com.covid19project.OnlineDoctorsActivity;
+import com.covid19project.OnlineEducationActivity;
 import com.covid19project.OrphanageSupport.FreeFoodActivity;
 import com.covid19project.OrphanageSupportActivity;
 import com.covid19project.R;
@@ -39,8 +39,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.List;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ImageViewHolder> {
 
@@ -84,116 +82,133 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ImageViewHolde
                         final Jsons jsons = dataSnapshot.getValue(Jsons.class);
                         switch (holder.getAdapterPosition()) {
                             case 0:
-                                Intent intent0 = new Intent(mContext, CoronaActivity.class);
-                                intent0.putExtra("url", jsons.getCorona());
-                                mContext.startActivity(intent0);
+                                Intent coronaintent = new Intent(mContext, CoronaActivity.class);
+                                coronaintent.putExtra("url", jsons.getCorona());
+                                mContext.startActivity(coronaintent);
                                 break;
                             case 1:
-                                Intent selfintent = new Intent(Intent.ACTION_VIEW);
-                                selfintent.setData(Uri.parse(jsons.getSelfreport()));
-                                mContext.startActivity(selfintent);
+                                Intent containmentzoneintent = new Intent(mContext, ContainmentZonesActivity.class);
+                                mContext.startActivity(containmentzoneintent);
                                 break;
                             case 2:
-                                Intent intent = new Intent(mContext, HomeTreamentActivity.class);
-                                intent.putExtra("image_url", jsons.getHome_treatment_images());
-                                intent.putExtra("link_url", jsons.getHome_treatment_links());
-                                mContext.startActivity(intent);
+                                Intent selfreportintent = new Intent(Intent.ACTION_VIEW);
+                                selfreportintent.setData(Uri.parse(jsons.getSelfreport()));
+                                mContext.startActivity(selfreportintent);
                                 break;
-
                             case 3:
-                                Intent intent1 = new Intent(mContext, TollNumbersActivity.class);
-                                intent1.putExtra("url", jsons.getToll_numbers());
-                                mContext.startActivity(intent1);
+                                Intent hometreatmentintent = new Intent(mContext, HomeTreamentActivity.class);
+                                hometreatmentintent.putExtra("image_url", jsons.getHome_treatment_images());
+                                hometreatmentintent.putExtra("link_url", jsons.getHome_treatment_links());
+                                mContext.startActivity(hometreatmentintent);
                                 break;
 
                             case 4:
-                                Intent intent2 = new Intent(mContext, MyHealthStatusActivity.class);
-                                mContext.startActivity(intent2);
+                                Intent tollnumbersintent = new Intent(mContext, TollNumbersActivity.class);
+                                tollnumbersintent.putExtra("url", jsons.getToll_numbers());
+                                mContext.startActivity(tollnumbersintent);
                                 break;
 
                             case 5:
-                                Intent intent3 = new Intent(mContext, HealthCareActivity.class);
-                                mContext.startActivity(intent3);
+                                Intent myhealthstatusintent = new Intent(mContext, MyHealthStatusActivity.class);
+                                mContext.startActivity(myhealthstatusintent);
                                 break;
 
                             case 6:
-                                Intent intent4 = new Intent(mContext, MedicalStoresActivity.class);
-                                mContext.startActivity(intent4);
+                                Intent healthcareintent = new Intent(mContext, HealthCareActivity.class);
+                                mContext.startActivity(healthcareintent);
                                 break;
+
                             case 7:
-                                Intent intent5 = new Intent(mContext, OnlineDoctorsActivity.class);
-                                mContext.startActivity(intent5);
+                                Intent medicalstoresintent = new Intent(mContext, MedicalStoresActivity.class);
+                                mContext.startActivity(medicalstoresintent);
                                 break;
                             case 8:
-                                Intent intent6 = new Intent(mContext, HospitalAdmissionActivity.class);
-                                mContext.startActivity(intent6);
+                                Intent onlinedoctorintent = new Intent(mContext, OnlineDoctorsActivity.class);
+                                mContext.startActivity(onlinedoctorintent);
                                 break;
-
                             case 9:
-                                Intent intent7 = new Intent(mContext, VolunteersActivity.class);
-                                mContext.startActivity(intent7);
-                                break;
-                            case 10:
-                                Intent intent10 = new Intent(mContext, FreeFoodActivity.class);
-                                mContext.startActivity(intent10);
+                                Intent hospitaladmissionintent = new Intent(mContext, HospitalAdmissionActivity.class);
+                                mContext.startActivity(hospitaladmissionintent);
                                 break;
 
+                            case 10:
+                                Intent volunteersintent = new Intent(mContext, VolunteersActivity.class);
+                                mContext.startActivity(volunteersintent);
+                                break;
                             case 11:
-                                Intent intent8 = new Intent(mContext, TestLabsActivity.class);
-                                intent8.putExtra("url", jsons.getLab_test());
-                                mContext.startActivity(intent8);
+                                Intent freefoodintent = new Intent(mContext, FreeFoodActivity.class);
+                                mContext.startActivity(freefoodintent);
                                 break;
 
                             case 12:
-                                Intent intent9 = new Intent(mContext, OrphanageSupportActivity.class);
-                                mContext.startActivity(intent9);
+                                Intent testlabsintent = new Intent(mContext, TestLabsActivity.class);
+                                testlabsintent.putExtra("url", jsons.getLab_test());
+                                mContext.startActivity(testlabsintent);
                                 break;
 
                             case 13:
-                                Intent intent13 = new Intent(Intent.ACTION_VIEW);
-                                intent13.setData(Uri.parse(jsons.getEpass()));
-                                mContext.startActivity(intent13);
+                                Intent orphanagesupportintent = new Intent(mContext, OrphanageSupportActivity.class);
+                                mContext.startActivity(orphanagesupportintent);
                                 break;
 
                             case 14:
-                                Intent intent12 = new Intent(mContext, DonateFundsActivity.class);
-                                mContext.startActivity(intent12);
+                                Intent epassintent = new Intent(Intent.ACTION_VIEW);
+                                epassintent.setData(Uri.parse(jsons.getEpass()));
+                                mContext.startActivity(epassintent);
                                 break;
 
                             case 15:
-                                Intent intent15 = new Intent(mContext, DonateMaterialsActivity.class);
-                                intent15.putExtra("drug_url", jsons.getDonate_drug());
-                                intent15.putExtra("relief_url", jsons.getDonate_relief());
-                                mContext.startActivity(intent15);
+                                Intent donatefundsintent = new Intent(mContext, DonateFundsActivity.class);
+                                mContext.startActivity(donatefundsintent);
                                 break;
+
                             case 16:
-                                Intent intent14 = new Intent(Intent.ACTION_VIEW);
-                                intent14.setData(Uri.parse(jsons.getTracker()));
-                                mContext.startActivity(intent14);
+                                Intent donatematerialsintent = new Intent(mContext, DonateMaterialsActivity.class);
+                                donatematerialsintent.putExtra("drug_url", jsons.getDonate_drug());
+                                donatematerialsintent.putExtra("relief_url", jsons.getDonate_relief());
+                                mContext.startActivity(donatematerialsintent);
                                 break;
                             case 17:
-                                Intent intent17 = new Intent(mContext, CounsellingActivity.class);
-                                mContext.startActivity(intent17);
+                                Intent applicationtrackerintent = new Intent(Intent.ACTION_VIEW);
+                                applicationtrackerintent.setData(Uri.parse(jsons.getTracker()));
+                                mContext.startActivity(applicationtrackerintent);
                                 break;
                             case 18:
-                                Intent intent18 = new Intent(Intent.ACTION_VIEW);
-                                intent18.setData(Uri.parse(jsons.getMigrant()));
-                                mContext.startActivity(intent18);
+                                Intent counsellingintent = new Intent(mContext, CounsellingActivity.class);
+                                mContext.startActivity(counsellingintent);
                                 break;
                             case 19:
-                                Intent intent19 = new Intent(mContext, TweetsActivity.class);
-                                intent19.putExtra("url", jsons.getTweets());
-                                mContext.startActivity(intent19);
+                                Intent migrantintent = new Intent(Intent.ACTION_VIEW);
+                                migrantintent.setData(Uri.parse(jsons.getMigrant()));
+                                mContext.startActivity(migrantintent);
                                 break;
+
                             case 20:
                                 Intent intent20 = new Intent(Intent.ACTION_VIEW);
-                                intent20.setData(Uri.parse(jsons.getVideos()));
+                                intent20.setData(Uri.parse(jsons.getGo()));
                                 mContext.startActivity(intent20);
                                 break;
                             case 21:
-                                Intent intent21 = new Intent(mContext, FAQsActivity.class);
-                                intent21.putExtra("url", jsons.getFaq());
-                                mContext.startActivity(intent21);
+                                Intent educationintent = new Intent(mContext, OnlineEducationActivity.class);
+                                educationintent.putExtra("sb", jsons.getTn());
+                                educationintent.putExtra("cbse",jsons.getCbse());
+                                educationintent.putExtra("vc",jsons.getVc());
+                                mContext.startActivity(educationintent);
+                                break;
+                            case 22:
+                                Intent tweetintent = new Intent(mContext, TweetsActivity.class);
+                                tweetintent.putExtra("url", jsons.getTweets());
+                                mContext.startActivity(tweetintent);
+                                break;
+                            case 23:
+                                Intent videointent = new Intent(Intent.ACTION_VIEW);
+                                videointent.setData(Uri.parse(jsons.getVideos()));
+                                mContext.startActivity(videointent);
+                                break;
+                            case 24:
+                                Intent faqintent = new Intent(mContext, FAQsActivity.class);
+                                faqintent.putExtra("url", jsons.getFaq());
+                                mContext.startActivity(faqintent);
                                 break;
 
                         }

@@ -44,26 +44,31 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView Grid_List;
     private FirebaseAuth mAuth;
     private ImageView Profile, Menu;
+    private FloatingActionButton Alarm;
+
     String[] web = {
             "Corona Status",
+            "Containment Zones",
             "Self Report",
             "Home Treatment",
             "Toll Free Numbers",
             "My Health Status",
-            "Health Care for Covid19",
+            "Health Care for COVID-19",
             "Medical stores",
             "Doctor Online Appointment",
             "Hospital Admissions",
             "Volunteers & Donates",
             "Food Supply",
             "Labs for Test",
-            "Support Orphans and vulnerable",
+            "Support Orphans & Vulnerable",
             "E-Pass",
             "Donate Funds",
             "Donate Relief Material",
             "Application Tracker",
             "Counselling",
             "Non Resident People",
+            "Government Orders",
+            "Online Education",
             "Tweets",
             "Videos",
             "FAQs"
@@ -71,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
     } ;
     int[] imageId = {
             R.drawable.corona,
+            R.drawable.containment,
             R.drawable.selfreport,
             R.drawable.home,
             R.drawable.toll_numbers,
@@ -89,6 +95,8 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.tracker,
             R.drawable.counselling,
             R.drawable.people,
+            R.drawable.governmentorder,
+            R.drawable.education,
             R.drawable.tweet,
             R.drawable.video,
             R.drawable.faq
@@ -102,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         Grid_List = findViewById(R.id.grid_list);
+
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),3, LinearLayoutManager.VERTICAL,false);
         Grid_List.setLayoutManager(gridLayoutManager);
 
@@ -118,6 +127,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
 
         Menu.setOnClickListener(new View.OnClickListener() {
             @Override

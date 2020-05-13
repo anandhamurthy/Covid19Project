@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,9 +44,13 @@ public class LinkAdapter extends RecyclerView.Adapter<LinkAdapter.ImageViewHolde
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, WebViewActivity.class);
-                intent.putExtra("link",link.getLink());
-                mContext.startActivity(intent);
+                if (!link.getLink().isEmpty()) {
+                    Intent intent = new Intent(mContext, WebViewActivity.class);
+                    intent.putExtra("link", link.getLink());
+                    mContext.startActivity(intent);
+                }else{
+                    Toast.makeText(mContext, "Loading..", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

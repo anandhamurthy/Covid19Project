@@ -35,7 +35,7 @@
             android:drawableLeft="@drawable/phone"
             android:drawablePadding="5dp"
             android:id="@+id/emergency_number"
-            android:autoLink="phone"
+            android:autoLink="all"
             android:layout_height="wrap_content"/>
 
         <TextView
@@ -47,7 +47,7 @@
             android:drawablePadding="5dp"
             android:drawableLeft="@drawable/phone"
             android:textColor="@color/colorBlack"
-            android:autoLink="phone"
+            android:autoLink="all"
             android:fontFamily="@font/nunito"
             android:layout_height="wrap_content"/>
 

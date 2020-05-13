@@ -41,7 +41,7 @@ public class DonateDrugAdapter extends RecyclerView.Adapter<DonateDrugAdapter.Im
         final DonateDrug donateDrug = mDonate_Drug.get(position);
 
         holder.Ware_House.setText(donateDrug.getCode()+". "+donateDrug.getWare_house());
-        holder.Mobile.setText(donateDrug.getMobile());
+        holder.Mobile.setText("+91"+donateDrug.getMobile());
     }
 
     @Override

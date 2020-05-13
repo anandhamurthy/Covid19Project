@@ -4,37 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/healthcare_bg"
     tools:context=".HealthCareActivity">
 
-
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+    <RelativeLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".HealthCareActivity" />
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:id="@+id/toolbar"
+        android:background="@drawable/rounded">
 
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/toolbar_icon"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/back"
+            android:layout_marginLeft="10dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:gravity="left"
-        android:orientation="vertical">
-
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/healthcare"
-            android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|start"
-            android:layout_margin="15dp"
-            android:backgroundTint="@color/colorWhite"
-            android:src="@drawable/bed"
-            android:onClick="onClick"
-            app:borderWidth="0dp"
-            app:elevation="6dp"
-            app:pressedTranslationZ="12dp" />
-    </LinearLayout>
+            android:fontFamily="@font/nunito_bold"
+            android:layout_toEndOf="@+id/toolbar_icon"
+            android:layout_centerVertical="true"
+            android:textSize="20dp"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/colorBlack"
+            android:text="Health Care For COVID-19"
+            android:layout_toRightOf="@+id/toolbar_icon"
+            android:layout_marginLeft="10dp" />
+
+    </RelativeLayout>
+
+    <GridView
+        android:numColumns="3"
+        android:gravity="center"
+        android:columnWidth="100dp"
+        android:stretchMode="columnWidth"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_margin="10dp"
+        android:layout_height="match_parent"
+        android:id="@+id/grid_view"
+        />
 
 </RelativeLayout>

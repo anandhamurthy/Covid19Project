@@ -4,8 +4,9 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -13,6 +14,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".OnlineEducationActivity" />
         <activity
             android:name=".Login.SplashActivity"
             android:theme="@style/AppThemeDonate">
@@ -22,13 +24,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".TweetsActivity"
-            android:label="Tweets"/>
-        <activity android:name=".OnlineDoctorsActivity"
-            android:label="Online Doctors"/>
-        <activity android:name=".HospitalAdmissionActivity"
-            android:label="Hospital Admissions"/>
+        <activity
+            android:name=".TweetsActivity"
+            android:label="Tweets" />
+        <activity
+            android:name=".OnlineDoctorsActivity"
+            android:label="Online Doctors" />
+        <activity
+            android:name=".HospitalAdmissionActivity"
+            android:label="Hospital Admissions" />
         <activity android:name=".HealthCareActivity" />
         <activity
             android:name=".OrphanageSupportActivity"
@@ -38,8 +42,8 @@
             android:label="Confirm Your Details" />
         <activity
             android:name=".OrphanageSupport.FreeFoodActivity"
-            android:theme="@style/AppThemeOrphanage"
-            android:label="Free Foods">
+            android:label="Free Foods"
+            android:theme="@style/AppThemeOrphanage">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
@@ -50,8 +54,8 @@
         </activity>
         <activity
             android:name=".OrphanageSupport.HomesActivity"
-            android:theme="@style/AppThemeOrphanage"
-            android:label="Free Accommodations Homes">
+            android:label="Free Accommodations Homes"
+            android:theme="@style/AppThemeOrphanage">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
@@ -62,8 +66,8 @@
         </activity>
         <activity
             android:name=".OrphanageSupport.DeliveryActivity"
-            android:theme="@style/AppThemeOrphanage"
-            android:label="Free Delivery">
+            android:label="Free Delivery"
+            android:theme="@style/AppThemeOrphanage">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
@@ -74,8 +78,8 @@
         </activity>
         <activity
             android:name=".VolunteersActivity"
-            android:theme="@style/AppThemeOrphanage"
-            android:label="Volunteers and Donors">
+            android:label="Volunteers and Donors"
+            android:theme="@style/AppThemeOrphanage">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
@@ -112,13 +116,13 @@
         <activity
             android:name=".Login.VerifyActivity"
             android:label="Verify"
-            android:theme="@style/AppThemeDonate"
-            android:screenOrientation="unspecified" />
+            android:screenOrientation="unspecified"
+            android:theme="@style/AppThemeDonate" />
         <activity
             android:name=".Login.LoginActivity"
             android:label="Login"
-            android:theme="@style/AppThemeDonate"
-            android:screenOrientation="unspecified" />
+            android:screenOrientation="unspecified"
+            android:theme="@style/AppThemeDonate" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -130,9 +134,10 @@
         <activity
             android:name=".MedicalStoresActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".FAQsActivity"
+        <activity
+            android:name=".FAQsActivity"
             android:label="FAQs"
-            android:screenOrientation="unspecified"/>
+            android:screenOrientation="unspecified" />
         <activity
             android:name=".TollNumbersActivity"
             android:label="Toll Free Numbers"
@@ -161,6 +166,64 @@
             android:name=".CounsellingActivity"
             android:label="Counselling"
             android:screenOrientation="unspecified" />
+        <activity
+            android:name=".Alarms.AddEditAlarmActivity"
+            android:theme="@style/AppThemeOrphanage" />
+        <activity
+            android:name=".Alarms.AlarmLandingPageActivity"
+            android:theme="@style/AlertLandingPageTheme" />
+
+        <service android:name=".Services.LoadAlarmsService" />
+
+        <receiver android:name=".Services.LoadAlarmsReceiver" />
+        <receiver android:name=".Services.AlarmReceiver" />
+        <receiver
+            android:name=".Services.BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".HealthCareListActivity"
+            android:label="Health Care Centers"
+            android:theme="@style/AppThemeOrphanage">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ContainmentListActivity"
+            android:label="Containment List"
+            android:theme="@style/AppThemeOrphanage">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ShowMapActivity"
+            android:label="Free Delivery"
+            android:theme="@style/AppThemeOrphanage">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".AlarmActivity" />
+        <activity android:name=".ContainmentZonesActivity" />
     </application>
 
 </manifest>

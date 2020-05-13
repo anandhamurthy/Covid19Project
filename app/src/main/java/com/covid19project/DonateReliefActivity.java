@@ -90,6 +90,7 @@ public class DonateReliefActivity extends AppCompatActivity{
                             mAdapter = new DonateReliefAdapter(DonateReliefActivity.this, viewItems);
                             mRecyclerView.setAdapter(mAdapter);
                             mAdapter.notifyDataSetChanged();
+                            mAdapter.notifyDataSetChanged();
 
                         } catch (JSONException e) {
                             e.printStackTrace();

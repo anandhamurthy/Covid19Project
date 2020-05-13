@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/app_bg"
+    android:layout_height="match_parent"
+    tools:context=".AlarmActivity">
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:id="@+id/toolbar"
+        android:background="@drawable/rounded_white">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/toolbar_icon"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/back"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
+            android:layout_toEndOf="@+id/toolbar_icon"
+            android:layout_centerVertical="true"
+            android:textSize="20dp"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/colorBlack"
+            android:text="My Alarms"
+            android:layout_toRightOf="@+id/toolbar_icon"
+            android:layout_marginLeft="10dp" />
+
+    </RelativeLayout>
+
+    <com.covid19project.Alarms.EmptyRecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/alarm_list" />
+
+
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fontFamily="@font/nunito"
+        android:gravity="center"
+        android:textColor="@color/colorWhite"
+        android:textSize="20dp"
+        android:text="No Alarms Yet. Click + to add."/>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_alarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="28dp"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/add" />
+
+
+
+</RelativeLayout>

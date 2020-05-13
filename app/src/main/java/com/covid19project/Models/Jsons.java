@@ -3,12 +3,12 @@ package com.covid19project.Models;
 public class Jsons {
 
     String videos, home_treatment_images, home_treatment_links, toll_numbers, lab_test,
-            donate_drug, donate_relief, tweets, faq, selfreport, epass, tracker, migrant, corona;
+            donate_drug, donate_relief, tweets, faq, selfreport, epass, tracker, migrant, corona, tn, cbse, vc, go;
 
     public Jsons() {
     }
 
-    public Jsons(String videos, String home_treatment_images, String home_treatment_links, String toll_numbers, String lab_test, String donate_drug, String donate_relief, String tweets, String faq, String selfreport, String epass, String tracker, String migrant, String corona) {
+    public Jsons(String videos, String home_treatment_images, String home_treatment_links, String toll_numbers, String lab_test, String donate_drug, String donate_relief, String tweets, String faq, String selfreport, String epass, String tracker, String migrant, String corona, String tn, String cbse, String vc, String go) {
         this.videos = videos;
         this.home_treatment_images = home_treatment_images;
         this.home_treatment_links = home_treatment_links;
@@ -23,6 +23,10 @@ public class Jsons {
         this.tracker = tracker;
         this.migrant = migrant;
         this.corona = corona;
+        this.tn = tn;
+        this.cbse = cbse;
+        this.vc = vc;
+        this.go = go;
     }
 
     public String getVideos() {
@@ -135,5 +139,37 @@ public class Jsons {
 
     public void setCorona(String corona) {
         this.corona = corona;
+    }
+
+    public String getTn() {
+        return tn;
+    }
+
+    public void setTn(String tn) {
+        this.tn = tn;
+    }
+
+    public String getCbse() {
+        return cbse;
+    }
+
+    public void setCbse(String cbse) {
+        this.cbse = cbse;
+    }
+
+    public String getVc() {
+        return vc;
+    }
+
+    public void setVc(String vc) {
+        this.vc = vc;
+    }
+
+    public String getGo() {
+        return go;
+    }
+
+    public void setGo(String go) {
+        this.go = go;
     }
 }

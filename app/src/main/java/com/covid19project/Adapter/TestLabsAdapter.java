@@ -1,16 +1,25 @@
 package com.covid19project.Adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 import com.covid19project.Models.Test_Labs;
 import com.covid19project.R;
+import com.covid19project.Services.AlarmReceiver;
+import com.covid19project.Services.DatabaseHelper;
+import com.covid19project.Services.LoadAlarmsService;
+import com.covid19project.ShowMapActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +50,25 @@ public class TestLabsAdapter extends RecyclerView.Adapter<TestLabsAdapter.ImageV
         holder.Lab_Name.setText(test_labs.getName());
         holder.Location.setText(test_labs.getLocation());
         holder.Type.setText(test_labs.getType());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog.Builder builder =
+                        new AlertDialog.Builder(mContext, R.style.DeleteAlarmDialogTheme);
+                builder.setTitle("See Location");
+                builder.setMessage("Do you want to know location ?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(mContext, ShowMapActivity.class);
+                        intent.putExtra("place", test_labs.getLocation());
+                        mContext.startActivity(intent);
+                    }
+                });
+                builder.setNegativeButton("No", null);
+                builder.show();
+            }
+        });
     }
 
     @Override
