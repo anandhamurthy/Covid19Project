@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import com.covid19project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskExecutors;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,10 +38,19 @@ public class VerifyActivity extends AppCompatActivity {
 
     private String verificationId, Phone_Number;
     private FirebaseAuth mAuth;
-    private EditText Verify_Code;
+    private TextInputEditText Verify_Code;
+    private TextView Verify_Timer;
     private TextView Description;
-    private Button Verify_Done;
+    private Button Verify_Done, Verify_Resend;
     private DatabaseReference mUsersDatabase;
+
+    private CountDownTimer countDownTimer;
+
+    private boolean startTimer = false;
+
+    private final long startTime = (120 * 1000);
+    private final long interval = 1 * 1000;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +64,28 @@ public class VerifyActivity extends AppCompatActivity {
         Verify_Code = findViewById(R.id.verify_code);
         Verify_Done=findViewById(R.id.verify_done);
         Description=findViewById(R.id.verify_text);
+        Verify_Timer=findViewById(R.id.verify_timer);
+        Verify_Resend=findViewById(R.id.verify_resend);
+
+
+        countDownTimer = new MyCountDownTimer(startTime, interval);
+
+        Verify_Timer.setText(Verify_Timer.getText() + String.valueOf(startTime / (60 * 1000)));
+        timerControl(true);
+
 
         Phone_Number = getIntent().getStringExtra("phonenumber");
         Description.setText("Waiting to automatically detect a SMS sent to "+Phone_Number+".");
         sendVerificationCode(Phone_Number);
+
+        Verify_Resend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendVerificationCode(Phone_Number);
+                timerControl(true);
+            }
+        });
+
 
         Verify_Done.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +94,7 @@ public class VerifyActivity extends AppCompatActivity {
                 if (s.isEmpty() || s.length() < 6) {
                     Verify_Code.setError("Enter code.");
                     Verify_Code.requestFocus();
-                }else {
+                } else {
                     verifyCode(s.toString());
                 }
             }
@@ -80,8 +109,10 @@ public class VerifyActivity extends AppCompatActivity {
     }
 
     private void signInWithCredential(PhoneAuthCredential credential) {
+        timerControl(false);
         final ProgressDialog pd = new ProgressDialog(VerifyActivity.this);
         pd.setMessage("Logging in.");
+        pd.setCanceledOnTouchOutside(false);
         pd.show();
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -184,4 +215,45 @@ public class VerifyActivity extends AppCompatActivity {
             Toast.makeText(VerifyActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
     };
+
+    public void timerControl(Boolean startTimer) {
+        if (startTimer) {
+            countDownTimer.start();
+            Verify_Resend.setVisibility(View.GONE);
+            Verify_Done.setVisibility(View.VISIBLE);
+
+        } else {
+            countDownTimer.cancel();
+            Verify_Resend.setVisibility(View.VISIBLE);
+            Verify_Done.setVisibility(View.GONE);
+
+        }
+
+    }
+
+
+    public class MyCountDownTimer extends CountDownTimer {
+        public MyCountDownTimer(long startTime, long interval) {
+            super(startTime, interval);
+        }
+
+
+        @Override
+        public void onFinish() {
+            Verify_Timer.setText("00 : 00");
+            Verify_Resend.setVisibility(View.VISIBLE);
+            timerControl(true);
+        }
+
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+
+            long currentTime = millisUntilFinished/1000 ;
+
+            Verify_Timer.setText("" + currentTime/60 + " : " +((currentTime % 60)>=10 ? currentTime % 60:"0" +( currentTime % 60)));
+
+        }
+
+    }
 }

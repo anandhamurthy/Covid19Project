@@ -43,7 +43,6 @@ public class OnlineDoctorsActivity extends AppCompatActivity implements PersonAd
     private RelativeLayout mNoPersons;
 
     private DatabaseReference mPersonsDatabase;
-    private ImageView Back;
     private SearchView searchView;
 
     @Override
@@ -54,7 +53,6 @@ public class OnlineDoctorsActivity extends AppCompatActivity implements PersonAd
         Add = findViewById(R.id.add);
         mNoPersons = findViewById(R.id.no_persons);
         mPersonList = findViewById(R.id.volunteer_list);
-        Back = findViewById(R.id.toolbar_icon);
 
         mPersonsDatabase = FirebaseDatabase.getInstance().getReference().child("Persons");
         mPersonsDatabase.keepSynced(true);
@@ -67,14 +65,6 @@ public class OnlineDoctorsActivity extends AppCompatActivity implements PersonAd
         mPersonList.setAdapter(personAdapter);
 
         readPersons("Doctor Online Appointment");
-
-        Back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
         Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

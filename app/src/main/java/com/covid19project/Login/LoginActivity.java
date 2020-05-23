@@ -9,13 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.covid19project.R;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 
 public class LoginActivity extends AppCompatActivity{
 
-    private EditText Login_Phone_Number;
+    private TextInputEditText Login_Phone_Number;
     private Button Login_Verify;
     private String Code="+91";
     @Override

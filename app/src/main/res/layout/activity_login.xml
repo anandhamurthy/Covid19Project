@@ -2,9 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/login_bg"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Login.LoginActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -35,27 +36,33 @@
                 android:layout_below="@id/login_text"
                 android:fontFamily="@font/nunito"
                 android:gravity="center"
-                android:text="Covid19 Project will send a OTP to verify your Mobile Number."
+                android:text="TN-COVID-19 Project will send a OTP to verify your Mobile Number."
                 android:textColor="@color/colorBlack" />
 
-            <EditText
-                android:id="@+id/login_phone_number"
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phone_number_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:digits="0123456789"
-                android:background="@drawable/button_bg"
-                android:padding="10dp"
-                android:drawableLeft="@drawable/phone"
-                android:layout_marginStart="10dp"
-                android:drawablePadding="10dp"
-                android:textSize="20dp"
-                android:hint="Mobile number"
-                android:layout_marginEnd="10dp"
-                android:layout_below="@+id/login_details_text"
-                android:fontFamily="@font/nunito"
-                android:inputType="phone" />
+                android:hint=" Phone Number"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:hintTextColor="@color/colorPrimary"
+                android:layout_margin="15dp"
+                android:layout_below="@+id/login_details_text">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/login_phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="10"
+                    android:digits="0123456789"
+                    android:drawableLeft="@drawable/phone"
+                    android:drawablePadding="10dp"
+                    android:layout_margin="5dp"
+                    android:fontFamily="@font/nunito"
+                    android:inputType="phone" />
+            </com.google.android.material.textfield.TextInputLayout>
         </RelativeLayout>
 
 
@@ -84,4 +91,4 @@
     </LinearLayout>
 
 
-</RelativeLayout>
+</RelativeLayout >

@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             "Medical stores",
             "Doctor Online Appointment",
             "Hospital Admissions",
-            "Volunteers & Donates",
+            "Volunteers & Donors",
             "Food Supply",
             "Labs for Test",
             "Support Orphans & Vulnerable",
