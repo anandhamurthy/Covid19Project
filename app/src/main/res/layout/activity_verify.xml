@@ -35,8 +35,6 @@
         android:id="@+id/verify_code_layout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        app:boxStrokeColor="@color/colorPrimary"
-        app:hintTextColor="@color/colorPrimary"
         android:layout_height="wrap_content"
         android:hint=" OTP"
         android:layout_margin="10dp"

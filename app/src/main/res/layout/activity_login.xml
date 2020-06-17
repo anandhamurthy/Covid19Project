@@ -46,8 +46,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint=" Phone Number"
-                app:boxStrokeColor="@color/colorPrimary"
-                app:hintTextColor="@color/colorPrimary"
                 android:layout_margin="15dp"
                 android:layout_below="@+id/login_details_text">
 

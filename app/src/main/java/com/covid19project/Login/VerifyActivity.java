@@ -242,7 +242,6 @@ public class VerifyActivity extends AppCompatActivity {
         public void onFinish() {
             Verify_Timer.setText("00 : 00");
             Verify_Resend.setVisibility(View.VISIBLE);
-            timerControl(true);
         }
 
 
