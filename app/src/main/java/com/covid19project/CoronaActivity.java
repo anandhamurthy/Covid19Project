@@ -8,6 +8,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,7 +35,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java. util. Arrays;
 
 public class CoronaActivity extends AppCompatActivity {
 
@@ -76,19 +79,18 @@ public class CoronaActivity extends AppCompatActivity {
     }
 
     private void parseJSON(String url1) {
-        JsonObjectRequest request = new JsonObjectRequest(url1, null,
+        JsonObjectRequest request = new JsonObjectRequest("https://api.covid19india.org/state_district_wise.json", null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            JSONArray jsonArray = response.getJSONArray("districtData");
-
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject hit = jsonArray.getJSONObject(i);
-                                String district = hit.getString("district");
-                                String confirmed = hit.getString("confirmed");
-
-                                viewItems.add(new Corona(district, confirmed));
+                            JSONObject jsonObject = response.getJSONObject("Tamil Nadu").getJSONObject("districtData");
+                            Log.i("jsonresponse","hi");
+                            Iterator iterator = jsonObject.keys();
+                            JSONArray jsonArray = new JSONArray();
+                            while (iterator.hasNext()) {
+                                String key = (String) iterator.next();
+                                viewItems.add(new Corona(key, jsonObject.get(key).toString().split(",")[2].split(":")[1]));
                             }
                             mAdapter = new CoronaAdapter(CoronaActivity.this, viewItems);
                             mRecyclerView.setAdapter(mAdapter);
